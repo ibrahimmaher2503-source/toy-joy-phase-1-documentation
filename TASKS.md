@@ -1,0 +1,643 @@
+# TOY & JOY Phase 1 — Implementation Backlog
+
+## Backlog Rules
+
+Every task is executable/reviewable, delivers a visible result, and begins `Not Started`. Work only on tasks in `.ai/CURRENT_MILESTONE.md`; do not open more than one milestone. Every task inherits `AGENTS.md`, `docs/09-coding-standards.md`, `docs/13-definition-of-done.md`, the shared UI contract in `.ai/UI_SCREENS.md`, and the manual-only verification directive.
+
+Reuse Laravel, Flux UI, and a single approved mature package where appropriate. Do not build authentication, permissions, audit, Excel, PDF, barcode, backup, media/upload, data table, pagination, filter/sort, picker, searchable select, modal/drawer, toast/alert, chart, sidebar, breadcrumbs, form controls, loading, or empty state from scratch when an approved capability exists. Package names/versions are not approved until the actual Laravel project is inspected. Automated tests are currently deferred; no task creates or runs automated tests.
+
+## Phase 1 — Foundation, Access and Operational Controls
+
+### TSK-001 — Establish the Laravel Platform and Operational Baseline
+
+- **Task ID / Phase / Milestone / Status:** TSK-001; Phase 1; DM 1.1; **Paused (owner-authorized temporary sequencing exception; DEC-031)**.
+- **Implementation Progress:** The local platform now assigns a server-generated UUID request ID through Laravel Context and returns it as `X-Request-ID` on normal and rendered exception responses. Resilient bilingual 500/503 Blade views are present and the unexpected-error, JSON, actual maintenance-mode, responsive RTL/LTR, focus, and safe-retry behavior has been manually verified locally. Production infrastructure, monitoring, backup/restore, health authorization, and broader DM 1.1 evidence remain open.
+- **Title / Purpose / Description:** Establish and verify the single-repository Laravel modular-monolith baseline, environments, safe configuration, queues/scheduler/cache decision, logging/monitoring, attachment storage, backup/restore and deployment runbook. Implementation was explicitly authorized on 2026-08-02.
+- **Traceability:** PRD NFR-01, NFR-04, NFR-07; Stories US-032; Flows FLW-AUTH-01, FLW-RPT-03; UI UI-SYS-003–004, UI-SYS-010; AC AC-NFR-01, AC-NFR-04, AC-NFR-07; Security SEC-027–031.
+- **Dependencies / Required Inputs:** Local PHP/Laravel/SQLite baseline implemented; BLK-001–BLK-002 remain for production hosting/domain/database, Redis/queue/scheduler, storage/backup RPO/RTO, and monitoring/support owners.
+- **Database Entities:** platform configuration plus `attachments`, `audit_logs`, `approval_records` logical baseline; no production schema beyond authorized foundation.
+- **Backend / Livewire / Blade Deliverables:** Laravel foundation and environment/runbooks; health/backup status read models; full-page health/backup screens only if approved; safe error Blade views. No speculative module code.
+- **UI / Flux / Alpine / Vite:** UI-SYS-003, UI-SYS-004, UI-SYS-010; Flux Cards/Tables/Badges/Alerts/Progress/Error; Alpine none; Vite verified common entry and production assets.
+- **Suggested Packages:** Candidate capability only for backup and error monitoring after compatibility/security/license review; no package preselected or installed.
+- **Permissions / Validation / Audit / States / Print:** Administrator/Support/Reviewer scope; no secret display; environment/backup actions confirmed/audited; health states healthy/degraded/down; backup queued/success/fail; print authorized status report only.
+- **Manual Browser Verification:** Confirm production-safe errors/health authorization; create and restore an approved isolated backup; verify worker/scheduler/storage/monitoring signal and no secret leakage.
+- **Definition of Done:** `docs/13-definition-of-done.md`, DM 1.1 exit criteria, actual setup/run/recovery documentation, recorded evidence, no unresolved critical platform blocker.
+
+### TSK-002 — Implement Authentication, Sessions, and Account Recovery
+
+- **Task ID / Phase / Milestone / Status:** TSK-002; Phase 1; DM 1.1; **Not Started**.
+- **Title / Purpose / Description:** Deliver maintained Laravel session authentication, login, forgot/reset password, logout/revocation, locale/profile basics, and safe denied behavior without a custom auth framework.
+- **Traceability:** NFR-01, NFR-03–NFR-04; US-032; FLW-AUTH-01; UI-AUTH-001–002, UI-SYS-008–009; AC-NFR-01, AC-NFR-03–04; SEC-001–005, SEC-011.
+- **Dependencies / Required Inputs:** TSK-001; BLK-005; identity fields, password/reset/session/MFA/lockout policy.
+- **Database Entities:** `users`, framework session/reset structures as verified, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** auth routes/controllers/actions/policies using framework conventions; profile/session actions; Blade/Livewire auth/profile screens per actual starter approach.
+- **UI / Flux / Alpine / Vite:** Flux Card/Input/Checkbox/Button/Alert/Loading/Dialog; Alpine none unless framework component requires minimal behavior; Vite common auth assets.
+- **Suggested Packages:** Laravel-native authentication capability/starter appropriate to Blade/Livewire; do not add duplicate auth package.
+- **Permissions / Validation / Audit / States / Print:** guest/authenticated boundaries; credential/reset/password validation; generic errors/rate limits; login/reset/session events; active/locked/expired; Print None.
+- **Manual Browser Verification:** Valid/invalid/locked login, rate limit, reset expiry/single use, session regeneration/logout/revocation, CSRF, direct denied route, RTL/LTR/responsive/accessibility.
+- **Definition of Done:** DoD plus owner session policy satisfied and all actual results recorded.
+
+### TSK-003 — Build Application Layouts and Restricted PWA Shell
+
+- **Task ID / Phase / Milestone / Status:** TSK-003; Phase 1; DM 1.1; **Not Started**.
+- **Title / Purpose / Description:** Build Auth, Admin, Operations, and lightweight POS layouts in one Laravel app with context navigation, locale/direction, responsive behavior, PWA install/update shell and connectivity state.
+- **Traceability:** NFR-03–NFR-05, NFR-07; US-032; FLW-AUTH-01, FLW-OFF-01; UI UI-SYS-001–002, UI-OFF-001; AC-NFR-03–05, AC-NFR-07, AC-UI-01–04; SEC-011–013, SEC-031–034.
+- **Dependencies / Required Inputs:** TSK-001–002; BLK-003–BLK-004; browsers/devices, PWA/offline decision, context-switch policy.
+- **Database Entities:** user/role/scope context and future offline device registry (final table names at implementation).
+- **Backend / Livewire / Blade Deliverables:** scoped context resolver; Blade layouts; Livewire navigation/context/PWA state where useful; service worker only for approved shell/static policy.
+- **UI / Flux / Alpine / Vite:** Flux Sidebar/Header/Breadcrumb/Dropdown/Badge/Dialog/Toast; Alpine/small TypeScript for connectivity/install/update only; Vite common + minimal POS/PWA entry.
+- **Suggested Packages:** PWA capability candidate only after service-worker compatibility/security review; prefer platform APIs for simple install/connectivity.
+- **Permissions / Validation / Audit / States / Print:** scope-aware navigation and server policy; validate context switch; audit sensitive scope changes/device enrollment; online/offline/update/unsupported; None.
+- **Manual Browser Verification:** Layouts at target widths, keyboard/touch, Arabic RTL/English LTR, direct denial, locale/context, install/update/cache behavior, unsynced-queue protection.
+- **Definition of Done:** DoD; no separate frontend/API/SPA; no sensitive response cache; approved device behavior evidenced.
+
+### TSK-004 — Establish the Shared UI Foundation
+
+- **Task ID / Phase / Milestone / Status:** TSK-004; Phase 1; DM 1.1; **Not Started**.
+- **Title / Purpose / Description:** Implement the limited shared visual language and reusable shell/page/table/form/status/timeline/audit/print patterns using Flux UI first.
+- **Traceability:** NFR-05, NFR-07; US-032; all flows/screens; UI UI-SYS-001, UI-SYS-005–010; AC-UI-01–05; SEC-006–007, SEC-011, SEC-016, SEC-024.
+- **Dependencies / Required Inputs:** TSK-003; approved bilingual font/brand colors if available; Flux version compatibility.
+- **Database Entities:** None beyond UI read models; attachment/audit patterns consume their documented entities.
+- **Backend / Livewire / Blade Deliverables:** scoped/paginated list conventions, localized validation/error responses; reusable Blade/Livewire page patterns and print base templates.
+- **UI / Flux / Alpine / Vite:** Flux form controls, table/pagination, modal/dialog/drawer, toast/alert, badges, breadcrumbs, cards, states; Alpine only minimal interaction; Tailwind semantic tokens/logical directions; Vite shared styles.
+- **Suggested Packages:** None for internal design system; Flux UI is primary. Font/package only after license/performance review.
+- **Permissions / Validation / Audit / States / Print:** component examples must demonstrate denied/validation/loading/empty/error/success/disabled; no sensitive data; print base thermal/A4/label/PDF.
+- **Manual Browser Verification:** Component/pattern matrix across locales/directions/viewports/keyboard/touch/contrast/text expansion/print preview.
+- **Definition of Done:** DoD; no duplicate custom Flux components; pattern documentation and examples reflect actual implementation.
+
+### TSK-005 — Configure Company, Payment, Tax, Numbering, and Printer Settings
+
+- **Task ID / Phase / Milestone / Status:** TSK-005; Phase 1; DM 1.2; **In Progress (owner-authorized temporary sequencing exception; DEC-031)**.
+- **Title / Purpose / Description:** Deliver company identity, payment methods, effective tax settings, concurrency-safe numbering configurations, printer/templates and customer-policy settings.
+- **Traceability:** MD-01, NFR-01–NFR-02, NFR-06; US-001; FLW-ADM-05; UI UI-ADM-002, UI-ADM-006–009; AC-MD-01, AC-NFR-01–02, AC-NFR-06; SEC-017–018, SEC-039.
+- **Dependencies / Required Inputs:** Owner-authorized temporary sequencing exception DEC-031 and minimum local audit exception DEC-033; BLK-008 remains Open; company/currency/tax/methods/sequences/printers/templates/policies. DEC-033 authorizes only append-only local audit records for successful TSK-005 settings writes, not approval, attachment, retention/redaction, immutability, or production audit policy. Do not infer unapproved business or production policy.
+- **Database Entities:** `companies`, `payment_methods`, `tax_settings`, `document_sequences`, `printer_configurations`, `audit_logs`, `approval_records`.
+- **Backend / Livewire / Blade Deliverables:** settings models/migrations/actions/policies/version/effective rules/locked numbering; full-page setting screens and Blade print previews.
+- **UI / Flux / Alpine / Vite:** Flux Forms/Tables/Date/Select/Switch/Tabs/Preview/Dialog/Badges; Alpine none except print preview; common Vite assets.
+- **Suggested Packages:** Barcode/PDF/print capability not selected here; evaluate only when actual outputs require it.
+- **Permissions / Validation / Audit / States / Print:** Administrator manage, Reviewer view/export; unique/overlap/pattern/dependency validation; all changes/audits; active/inactive/effective; preview/test prints.
+- **Manual Browser Verification:** Duplicate/effective/unsafe deactivate and concurrent sequence allocation; unauthorized access; tax/method/evidence settings; thermal/A4/label preview RTL/LTR.
+- **Definition of Done:** DoD and DM 1.2 business inputs approved; past documents unaffected.
+
+### TSK-006 — Configure Branches, Stores, and Selling-Store Mapping
+
+- **Task ID / Phase / Milestone / Status:** TSK-006; Phase 1; DM 1.2; **Not Started**.
+- **Title / Purpose / Description:** Deliver branch/store masters, types/status, branch selling-store assignment/history, and controlled manager override context.
+- **Traceability:** MD-01, INV-02, NFR-01, NFR-03; US-001, US-013; FLW-ADM-01–02; UI UI-ADM-003–004; AC-MD-01, AC-INV-02; SEC-011–012, SEC-015, SEC-039.
+- **Dependencies / Required Inputs:** TSK-005; BLK-006; approved lists/types/mappings/overrides.
+- **Database Entities:** `branches`, `stores`, `branch_selling_stores`, `approval_records`, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** master/state/dependency rules, scope policies, effective mapping and override action; branch/store list/forms/detail.
+- **UI / Flux / Alpine / Vite:** Flux Tables/Search/Filters/Pagination/Forms/Combobox/Timeline/Dialog/Badges; Alpine none; common assets.
+- **Suggested Packages:** None; Laravel/Flux native patterns.
+- **Permissions / Validation / Audit / States / Print:** Administrator manage; branch/warehouse roles scoped view; unique codes, safe deactivate, non-overlap mapping; mapping/override audit; active/inactive; optional register print/export.
+- **Manual Browser Verification:** Create/edit/deactivate, duplicate/dependency, map one selling store, cross-scope denial, direct request, override reason/approval/audit, responsive RTL/LTR.
+- **Definition of Done:** DoD; approved structure loaded and mapping history trustworthy.
+
+### TSK-007 — Configure Cash Drawer Masters and Assignments
+
+- **Task ID / Phase / Milestone / Status:** TSK-007; Phase 1; DM 1.2; **Not Started**.
+- **Title / Purpose / Description:** Create branch/store-scoped drawer masters and safe assignment/status lifecycle used later by shifts.
+- **Traceability:** MD-01, CSH-01, NFR-01, NFR-03; US-001, US-024; FLW-ADM-03; UI UI-ADM-005; AC-MD-01, AC-CSH-01; SEC-011–012, SEC-017, SEC-019, SEC-039.
+- **Dependencies / Required Inputs:** TSK-006; approved drawer allocation/codes/status policy.
+- **Database Entities:** `cash_drawers`, `branches`, `stores`, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** drawer model/policy/dependency guards; list/create/edit/deactivate screen.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Search/Pagination/Form/Select/Badge/Dialog; Alpine none; common assets.
+- **Suggested Packages:** None.
+- **Permissions / Validation / Audit / States / Print:** Administrator manage; Branch Manager proposed scope; unique code, consistent assignment, no reassign/retire with active shift; changes audited; optional assignment register.
+- **Manual Browser Verification:** Duplicate, cross-branch assignment, dependency/active-shift guard, permission/direct URL, empty/error/success, responsive RTL/LTR.
+- **Definition of Done:** DoD; drawer data ready for DM 3.3 without inventing opening balances.
+
+### TSK-008 — Implement Users, Roles, Permissions, and Scopes
+
+- **Task ID / Phase / Milestone / Status:** TSK-008; Phase 1; DM 1.3; **Not Started**.
+- **Title / Purpose / Description:** Implement approved role/permission matrix with branch/store/action/document/field/approval/override and own-record scopes.
+- **Traceability:** MD-01, CUS-02, NFR-03; US-001, US-032; FLW-ADM-04; UI UI-ADM-010–012, UI-SYS-009; AC-MD-01, AC-CUS-02, AC-NFR-03; SEC-011–016, SEC-039.
+- **Dependencies / Required Inputs:** Phase 1 DM 1.2 complete; BLK-005, BLK-007; canonical roles and signed matrix.
+- **Database Entities:** `users`, `roles`, `permissions`, role/user/permission pivots, `user_branch_scopes`, `user_store_scopes`, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** policies/gates/scoped queries and grant/revoke actions; user/role/permission screens/matrix.
+- **UI / Flux / Alpine / Vite:** Flux Tables/Matrix Controls/Filters/Combobox/Tabs/Drawer/Dialog/Badges; Alpine only matrix affordance if Flux/Livewire insufficient; common assets.
+- **Suggested Packages:** Mature Laravel permission package candidate after version/maintenance/fit review; do not build a permission engine or install yet.
+- **Permissions / Validation / Audit / States / Print:** Administrator manage, Reviewer view; last-admin/self-lockout, invalid grant/scope, alias and limit validation; every grant/revoke audit; matrix PDF/export by right.
+- **Manual Browser Verification:** Every role allowed/denied navigation/direct routes/actions/scopes/fields/exports; Cashier/Party Wallet and Party Manager/Product Wallet isolation; Counter approval denial.
+- **Definition of Done:** DoD, DM 1.3 Delivery Criteria and owner-signed matrix; no `P`/`R` permission silently granted.
+
+### TSK-009 — Implement Approval, Audit, Attachment, and Immutability Controls
+
+- **Task ID / Phase / Milestone / Status:** TSK-009; Phase 1; DM 1.4; **Not Started** (DEC-033 authorizes only a minimum local settings-audit sub-slice for TSK-005; it does not start or complete TSK-009).
+- **Title / Purpose / Description:** Deliver append-only approvals/audit, protected attachments, per-document state-transition conventions, immutable approved records, source corrections, and number allocation integration.
+- **Traceability:** NFR-01–NFR-04, NFR-06; US-001, US-032; FLW-ADM-05, FLW-RPT-03; UI UI-SYS-005–006, UI-AUD-001; AC-NFR-01–04, AC-NFR-06; SEC-015, SEC-017–020, SEC-022–024, SEC-027.
+- **Dependencies / Required Inputs:** TSK-008; approval/reason matrix, attachment/retention/redaction policy.
+- **Database Entities:** `approval_records`, `audit_logs`, `attachments`, `document_sequences`; source/reference fields on future documents.
+- **Backend / Livewire / Blade Deliverables:** focused reusable approval/audit/attachment actions/policies, transition/immutable guards, authorized file delivery; inbox/audit/detail patterns.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Pagination/Drawer/Diff/Timeline/File Upload/Dialog/Toast/Badges; Alpine none; file preview/print assets only as needed.
+- **Suggested Packages:** Mature audit/activity and media capability candidates after compatibility/security review; avoid overlapping packages/custom engines.
+- **Permissions / Validation / Audit / States / Print:** explicit submit/approve/reject/override/reverse/cancel/delete/export; MIME/signature/size/hash/purpose; required self-audit; append-only states; audit/approval exports and source prints.
+- **Manual Browser Verification:** Stale/unauthorized transition, approval separation, original edit/delete denial, referenced correction, unsafe/cross-scope file, before/after redaction, duplicate numbering/action.
+- **Definition of Done:** DoD and Phase 1 gate; critical actions record required context and originals remain preserved.
+
+## Phase 2 — Catalog, Purchasing, Pricing, and Inventory
+
+### TSK-010 — Build Product, Category, Brand, Code, and Barcode Masters
+
+- **Task ID / Phase / Milestone / Status:** TSK-010; Phase 2; DM 2.1; **Not Started**.
+- **Title / Purpose / Description:** Create stable product identity, category hierarchy, brands, supplier/local barcode allocation and exact search behavior.
+- **Traceability:** MD-02–MD-03, MD-05; US-002; FLW-CAT-01; UI UI-CAT-001–003, UI-CAT-006–007; AC-MD-02–03, AC-MD-05; SEC-006, SEC-011–012, SEC-019–021.
+- **Dependencies / Required Inputs:** Phase 1 gate; BLK-009; hierarchy, codes, supplier-code allocation, attributes/search policy.
+- **Database Entities:** `products`, `categories`, `brands`, `suppliers`, `product_suppliers`, `barcodes`.
+- **Backend / Livewire / Blade Deliverables:** models/migrations/relations/unique and hierarchy rules/barcode action; paginated masters and product list/form foundation.
+- **UI / Flux / Alpine / Vite:** Flux Tables/Search/Filters/Pagination/Tree/Forms/Combobox/Badge/Dialog; Alpine scanner field capture only if needed; common assets.
+- **Suggested Packages:** Mature barcode generation candidate only for rendering, not identity allocation; inspect compatibility later.
+- **Permissions / Validation / Audit / States / Print:** catalog manage and cost-field scope; unique immutable item code/barcode, local format/serial concurrency, hierarchy cycle; audit identity/preference; label print blocked until pricing.
+- **Manual Browser Verification:** Create/search exact code/barcode/name, duplicate/concurrent allocation, supplier change stability, attributes no variants, hierarchy cycle, unauthorized fields, RTL/LTR.
+- **Definition of Done:** DoD; stable identity and search demonstrable with no stock or price side effect.
+
+### TSK-011 — Complete Product Cards, Types, Attributes, and Media
+
+- **Task ID / Phase / Milestone / Status:** TSK-011; Phase 2; DM 2.1; **Not Started**.
+- **Title / Purpose / Description:** Deliver full bilingual product card, standard/composite/service type behavior, reportable attributes, main + four additional protected images and lifecycle.
+- **Traceability:** MD-04–MD-05, PRC-02; US-002, US-005; FLW-CAT-01; UI UI-CAT-001–003; AC-MD-04–05, AC-PRC-02; SEC-006–010, SEC-016–017, SEC-022–024.
+- **Dependencies / Required Inputs:** TSK-010; approved types/composition data, UOM, required fields, images/size/retention.
+- **Database Entities:** `products`, `product_images`, `attachments`, categories/brands/supplier links; composition lines only if approved.
+- **Backend / Livewire / Blade Deliverables:** type-specific validation/actions, protected media, searchable/reportable fields; product detail and full form.
+- **UI / Flux / Alpine / Vite:** Flux Form Sections/Inputs/Textareas/Combobox/Radio/Upload/Tabs/Cards/Image/Timeline; Alpine image ordering only if necessary; Vite image styles.
+- **Suggested Packages:** Approved media capability candidate after security/version review; do not build a media library or install now.
+- **Permissions / Validation / Audit / States / Print:** product/type/media manage, cost scope; 1 main + max 4 extra, safe files, post-use type guard; changes audited; product card print optional.
+- **Manual Browser Verification:** All fields/types, invalid combinations, file attacks/limits/access, image order/count, search/report attributes, responsive RTL/LTR.
+- **Definition of Done:** DoD; all PRD fields usable and no implicit variant balances.
+
+### TSK-012 — Implement Staged Product Excel Import
+
+- **Task ID / Phase / Milestone / Status:** TSK-012; Phase 2; DM 2.1; **Not Started**.
+- **Title / Purpose / Description:** Stage upload, column mapping, Create Only/Update Existing, full validation, review/approval, valid-row write and rejected-row error download.
+- **Traceability:** PRC-01, NFR-04–NFR-05; US-004; FLW-CAT-02; UI UI-CAT-004–005; AC-PRC-01, AC-NFR-04–05; SEC-006, SEC-020, SEC-022–026.
+- **Dependencies / Required Inputs:** TSK-010–011; approved template, max size/rows, required/reference rules.
+- **Database Entities:** import batch/row structures to name during implementation, `attachments`, `products`, `barcodes`, `categories`, `audit_logs`, `approval_records`.
+- **Backend / Livewire / Blade Deliverables:** chunked staged parser/validator/idempotent approve action/error artifact; full-page stepper and error list.
+- **UI / Flux / Alpine / Vite:** Flux File Upload/Tabs or Stepper/Combobox/Table/Pagination/Progress/Dialog/Download/Toast; Alpine none; Vite common.
+- **Suggested Packages:** One mature Excel import/export package candidate after Laravel/version/security/formula review.
+- **Permissions / Validation / Audit / States / Print:** Import/Create/Update/Approve/Export Error; file/signature/formula/reference/duplicate/mode; batch states audited; safe Excel error download.
+- **Manual Browser Verification:** Valid/mixed-invalid/create-only/update/existing/duplicate/formula/large bounded/cancel/retry/unauthorized download; confirm invalid rows never write.
+- **Definition of Done:** DoD and exact acceptance statement evidenced.
+
+### TSK-013 — Implement Supplier Master and Product-Supplier History
+
+- **Task ID / Phase / Milestone / Status:** TSK-013; Phase 2; DM 2.1; **Not Started**.
+- **Title / Purpose / Description:** Maintain supplier contacts/status/terms, product preference, actual/history views, returns and last-price links without rewriting historical supplier.
+- **Traceability:** PUR-01–PUR-02, NFR-01–NFR-02; US-009; FLW-PUR-01–03; UI UI-CAT-008; AC-PUR-01–02; SEC-006, SEC-011–012, SEC-017, SEC-027.
+- **Dependencies / Required Inputs:** TSK-010; BLK-010; supplier data/identifiers/terms/preference authority.
+- **Database Entities:** `suppliers`, `product_suppliers`, future purchase sources, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** supplier masters/relations/history scopes/preference version action; list/detail/form/history tabs.
+- **UI / Flux / Alpine / Vite:** Flux Table/Search/Filters/Pagination/Form/Tabs/Timeline/Badge/Dialog; Alpine none; common assets.
+- **Suggested Packages:** None.
+- **Permissions / Validation / Audit / States / Print:** Purchasing manage, Warehouse/Reviewer view; unique/dependency/status/terms; preference before/after audit; active/inactive; supplier profile/history export/print.
+- **Manual Browser Verification:** Duplicate/deactivate/dependency/preference change, actual invoice history remains, last price scope, direct denial, responsive RTL/LTR.
+- **Definition of Done:** DoD; validated supplier data ready for purchase cycle.
+
+### TSK-014 — Implement Purchase Orders
+
+- **Task ID / Phase / Milestone / Status:** TSK-014; Phase 2; DM 2.2; **Not Started**.
+- **Title / Purpose / Description:** Deliver purchase-order line entry and Draft/Submitted/Partially Received/Received/Cancelled/Closed state machine with receipt links.
+- **Traceability:** PUR-03, NFR-01–NFR-03, NFR-06; US-010; FLW-PUR-01; UI UI-PUR-001; AC-PUR-03; SEC-011–012, SEC-015, SEC-017–020, SEC-027.
+- **Dependencies / Required Inputs:** Phase 2 DM 2.1 complete; supplier/store/product and PO authorization/terms.
+- **Database Entities:** `purchase_orders`, `purchase_order_lines`, `document_sequences`, `approval_records`, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** state/action/number/policy/line calculations; list/full-page editor/detail/timeline.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Search/Pagination/Form/Combobox/Line Editor/Date/Badges/Timeline/Dialog; Alpine none; print assets.
+- **Suggested Packages:** PDF capability evaluated later with other document outputs; no package required for core flow.
+- **Permissions / Validation / Audit / States / Print:** Create/Edit Draft/Submit/Cancel/Close/Print; supplier/product/qty/state/over-receipt; every line/state/reason audited; PO A4/PDF.
+- **Manual Browser Verification:** All states/invalid transitions/partial links/terminal edit/duplicate number/concurrent submit/permissions/print RTL/LTR.
+- **Definition of Done:** DoD; PO has no stock/payment effect and source links are reliable.
+
+### TSK-015 — Implement Purchase Invoices, Import, Receipt, and Weighted-Average Cost
+
+- **Task ID / Phase / Milestone / Status:** TSK-015; Phase 2; DM 2.2; **Not Started**.
+- **Title / Purpose / Description:** Manual/Excel purchase invoice, selected-store receipt, optional tax/discount, atomic approval, stock movement, weighted-average cost and pricing-review signal without sale-price change.
+- **Traceability:** PRC-03, PUR-04–PUR-05, NFR-01–NFR-02, NFR-06; US-011; FLW-PUR-02; UI UI-PUR-002, UI-INV-002–003; AC-PRC-03, AC-PUR-04–05; SEC-015, SEC-017–021, SEC-022–026.
+- **Dependencies / Required Inputs:** TSK-014; cost/rounding/tax/discount/import/receipt approvals and opening-stock approach.
+- **Database Entities:** `purchase_invoices`, `purchase_invoice_lines`, `purchase_orders`, `stock_movements`, `stock_balances`, `products`, `attachments`, `approval_records`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** manual/staged import, calculation and locked approval action, movement/cost/audit, immutable source; invoice editor/detail/approval/result.
+- **UI / Flux / Alpine / Vite:** Flux Table/Form/Upload/Line Editor/Combobox/Summary/Timeline/Dialog/Progress/Badges; Alpine none; print assets.
+- **Suggested Packages:** Reuse approved Excel capability; PDF candidate; no duplicate import engine.
+- **Permissions / Validation / Audit / States / Print:** Entry/Import/Submit/Approve/Reverse/Cost View; duplicate supplier ref, store, qty/cost/tax/discount, idempotency/concurrency; full audit; invoice/receipt A4.
+- **Manual Browser Verification:** Manual/import valid/invalid, PO partial/full, duplicate, formula including zero stock edge, concurrent receipt, movement/balance reconciliation, sale price unchanged, permission/print.
+- **Definition of Done:** DoD and DM 2.2 purchase receipt criteria satisfied with reproducible calculation evidence.
+
+### TSK-016 — Implement Supplier Returns
+
+- **Task ID / Phase / Milestone / Status:** TSK-016; Phase 2; DM 2.2; **Not Started**.
+- **Title / Purpose / Description:** Create approved supplier return linked to original purchase where available with cost/history and exact stock reduction.
+- **Traceability:** PUR-06, NFR-01–NFR-02, NFR-06; US-012; FLW-PUR-03; UI UI-PUR-003; AC-PUR-06; SEC-011–012, SEC-015, SEC-017–021, SEC-027.
+- **Dependencies / Required Inputs:** TSK-015; eligible/non-reference policy, return reasons/approvals.
+- **Database Entities:** `purchase_returns`, `purchase_return_lines`, `purchase_invoices`, `stock_movements`, `stock_balances`, `approval_records`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** eligibility/source/cost/state/locked posting and reference correction; list/editor/detail.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Search/Pagination/Form/Combobox/Line Editor/Summary/Timeline/Dialog; Alpine none; print assets.
+- **Suggested Packages:** Reuse document PDF capability if approved.
+- **Permissions / Validation / Audit / States / Print:** Create/Submit/Approve/Reverse/Print; original/supplier/store/available qty/cost/reason; all events/movements audited; supplier return A4/PDF.
+- **Manual Browser Verification:** Original/no-reference allowed path, excess/wrong supplier/store, concurrent stock, terminal edit, reversal/source history, permission and print.
+- **Definition of Done:** DoD; balance and cost history reconcile.
+
+### TSK-017 — Implement Price Proposals, Version Approval, and Open-Price Policy
+
+- **Task ID / Phase / Milestone / Status:** TSK-017; Phase 2; DM 2.3; **Not Started**.
+- **Title / Purpose / Description:** Deliver product/import/purchase-context proposals, immutable approval/version/effective price, one active location price, unpriced pending and configured open-price bounds.
+- **Traceability:** PRC-03–PRC-05, PRC-07–PRC-08, NFR-01–NFR-02; US-006–008; FLW-CAT-03–04, FLW-POS-01; UI UI-PRC-001–002, UI-POS-001; AC-PRC-03–05, AC-PRC-07–08; SEC-011–012, SEC-015–020, SEC-027.
+- **Dependencies / Required Inputs:** Phase 2 DM 2.2 complete; BLK-011; price authority/effective/branch exception/open-price rules.
+- **Database Entities:** `price_lists`, `price_versions`, `price_lines`, `approval_records`, `audit_logs`, `stock_balances` context.
+- **Backend / Livewire / Blade Deliverables:** proposal/import, state/locked atomic activation, lookup and open-price validation; pricing list/editor/diff/approval.
+- **UI / Flux / Alpine / Vite:** Flux Tables/Filters/Search/Pagination/Form/Upload/Diff/Timeline/Badges/Dialog; Alpine none; common/print assets.
+- **Suggested Packages:** Reuse Excel package if approved; no workflow engine.
+- **Permissions / Validation / Audit / States / Print:** Propose/Edit/Import/Submit/Approve/Reject/Branch Exception/Open Price; one active, amount/effective/range/reason/stale; full audit; approval summary print.
+- **Manual Browser Verification:** Every source, cost change no price, historical sale preserved, concurrent approvals, one active price, unpriced block, open price in/out/permission/offline, RTL/LTR.
+- **Definition of Done:** DoD; price history and future lookup deterministic.
+
+### TSK-018 — Implement Location Barcode Label Queues and Printing
+
+- **Task ID / Phase / Milestone / Status:** TSK-018; Phase 2; DM 2.3; **Not Started**.
+- **Title / Purpose / Description:** Generate one pending label per remaining unit/location after approved price and deliver selected-printer initial/reprint tracking.
+- **Traceability:** PRC-06–PRC-07, NFR-01; US-007; FLW-CAT-05; UI UI-PRC-003; AC-PRC-06–07; SEC-011–012, SEC-015, SEC-020–024, SEC-038.
+- **Dependencies / Required Inputs:** TSK-017; label/printer/paper/branch-exception and quantity/reprint policy; approved devices.
+- **Database Entities:** `label_queues`, `label_print_events`, `price_versions`, `price_lines`, `stock_balances`, `printer_configurations`.
+- **Backend / Livewire / Blade Deliverables:** idempotent queue calculation, print/reprint actions and audit; queue list/filters/job progress; Blade label template.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Search/Pagination/Printer Select/Progress/Dialog/Badges/Toast; Alpine/browser print/local integration only if approved; print-specific Vite CSS.
+- **Suggested Packages:** Mature barcode renderer only after compatibility/output review; no custom generator.
+- **Permissions / Validation / Audit / States / Print:** View/Print/Reprint; location/approved price/quantity/printer/reason; Pending/Partial/Completed/Failed; every event audited; label output.
+- **Manual Browser Verification:** Quantity/location/exception, unpriced block, partial/retry/reprint, cross-store denial, scanner readability, Arabic/English label, target printer.
+- **Definition of Done:** DoD and DM 2.3 label criteria on approved hardware.
+
+### TSK-019 — Implement Inventory Ledger, Balances, Availability, and Stock Cards
+
+- **Task ID / Phase / Milestone / Status:** TSK-019; Phase 2; DM 2.4; **Not Started**.
+- **Title / Purpose / Description:** Establish append-only movements, locked/materialized balances and scoped on-hand/available/in-transit/reserved/reorder/history views.
+- **Traceability:** INV-01–INV-02, NFR-01–NFR-03, NFR-05; US-013; FLW-INV-01; UI UI-INV-001–003; AC-INV-01–02, AC-NFR-05; SEC-011–012, SEC-016–021, SEC-027, SEC-037.
+- **Dependencies / Required Inputs:** Phase 2 DM 2.3 complete; opening inventory approach, balance/reservation/reorder formulas and field visibility.
+- **Database Entities:** `stock_movements`, `stock_balances`, `products`, `stores`, `branch_selling_stores`.
+- **Backend / Livewire / Blade Deliverables:** posting/reconciliation APIs internal to monolith, scoped indexed queries; overview/card/movement pages.
+- **UI / Flux / Alpine / Vite:** Flux Cards/Tables/Filters/Search/Pagination/Badges/Tabs/Timeline/Export; Alpine none; common assets.
+- **Suggested Packages:** None; no generic inventory engine or repository layer.
+- **Permissions / Validation / Audit / States / Print:** scoped View/Export/Cost; no direct edit; field and bounded-query validation; movement append audit; reports/export/stock card print.
+- **Manual Browser Verification:** Reconcile sources/balances, all quantities, reorder, other-branch informational search, cost/cross-scope denial, high volume/pagination/filter/sort, RTL/LTR.
+- **Definition of Done:** DoD; no critical ledger/balance discrepancy.
+
+### TSK-020 — Implement Stateful Stock Transfers and Difference Review
+
+- **Task ID / Phase / Milestone / Status:** TSK-020; Phase 2; DM 2.4; **Not Started**.
+- **Title / Purpose / Description:** Deliver transfer request/approval/dispatch/in-transit/partial/full receipt and shortage/damage/refusal review with exact movements.
+- **Traceability:** INV-03, NFR-01–NFR-02, NFR-06; US-014; FLW-INV-02; UI UI-INV-004–007; AC-INV-03; SEC-011–012, SEC-015, SEC-017–021, SEC-027.
+- **Dependencies / Required Inputs:** TSK-019; BLK-012; state/role separation/difference disposition/reason policy.
+- **Database Entities:** `stock_transfers`, `transfer_lines`, `stock_movements`, `stock_balances`, `approval_records`, `document_sequences`, attachments if evidence.
+- **Backend / Livewire / Blade Deliverables:** state actions/locks/idempotency/movements/differences; list/editor/dispatch/receipt/review screens.
+- **UI / Flux / Alpine / Vite:** Flux Table/Form/Line Editor/Scan Input/Filters/Timeline/Badges/Dialog/Upload; Alpine scanner only if needed; print styles.
+- **Suggested Packages:** Reuse approved barcode/upload/PDF capabilities only.
+- **Permissions / Validation / Audit / States / Print:** source/destination Create/Approve/Dispatch/Receive/Difference/Cancel; stock/location/qty/state/replay; every transition/quantity/reason; transfer/dispatch/receipt/difference prints.
+- **Manual Browser Verification:** Full/partial/damage/short/refusal/cancel, invalid jumps, double action, concurrent stock, cross-scope, movement reconciliation, print/scanner/RTL/LTR.
+- **Definition of Done:** DoD; source+transit+destination and differences reconcile.
+
+### TSK-021 — Implement Entries, Exits, Adjustments, and Stock Policies
+
+- **Task ID / Phase / Milestone / Status:** TSK-021; Phase 2; DM 2.4; **Not Started**.
+- **Title / Purpose / Description:** Deliver reasoned approved inventory entry/exit/exchange/adjustment with fractional and default negative-stock controls/override.
+- **Traceability:** INV-04–INV-06, NFR-01–NFR-02; US-015; FLW-INV-03–05; UI UI-INV-011; AC-INV-04–06; SEC-006, SEC-011–012, SEC-015, SEC-017–021, SEC-027.
+- **Dependencies / Required Inputs:** TSK-019; BLK-012; reasons, limits, negative/fractional/approval/disposition policy.
+- **Database Entities:** `inventory_adjustments`, `inventory_adjustment_lines`, `stock_movements`, `stock_balances`, `products`, `stores`, `approval_records`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** typed state actions/locks/movements/reversal; list/editor/detail/timeline.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Form/Line Editor/Combobox/Numeric/Summary/Timeline/Dialog/Badges; Alpine none; print assets.
+- **Suggested Packages:** None beyond shared document output.
+- **Permissions / Validation / Audit / States / Print:** Create/Submit/Approve/Reverse/Override; reason/store/qty/fraction/negative/source; full before-after/override audit; adjustment print.
+- **Manual Browser Verification:** Every type/direction, missing reason, whole/fractional, negative default/in-authority/out-of-authority, concurrency, terminal edit/reversal, cross-store/print.
+- **Definition of Done:** DoD; exact ledger effects and no direct balance UI.
+
+### TSK-022 — Implement Full/Partial Stock Counts and Reconciliation
+
+- **Task ID / Phase / Milestone / Status:** TSK-022; Phase 2; DM 2.4; **Not Started**.
+- **Title / Purpose / Description:** Plan full/partial counts, capture reference, scan/manual/recount while selling continues, reconcile movements, review uncounted items and create approved adjustments.
+- **Traceability:** INV-07–INV-09, NFR-01–NFR-03; US-016; FLW-INV-06–07; UI UI-INV-008–010; AC-INV-07–09; SEC-011–012, SEC-015, SEC-017, SEC-019–021, SEC-027.
+- **Dependencies / Required Inputs:** TSK-019, TSK-021; count scopes/recount/assignment/approval/unaccounted policy.
+- **Database Entities:** `stock_counts`, `count_lines`, `stock_movements`, `stock_balances`, `inventory_adjustments`, `approval_records`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** snapshot and movement-window calculation, state/separation/locked reconciliation; count list/entry/reconciliation.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Search/Pagination/Scan Input/Numeric/Progress/Diff/Timeline/Dialog/Badges; Alpine scanner/shortcuts only; print styles.
+- **Suggested Packages:** Reuse barcode capability; no generic count/workflow package.
+- **Permissions / Validation / Audit / States / Print:** Counter plan/input/submit; Manager reconcile/approve; scope/duplicate/qty/stale movement/uncounted; every edit/recount/approval; count/discrepancy/A4.
+- **Manual Browser Verification:** Full/partial/category/supplier/store, scan/manual/repeat, sales/movements during count, formula, counter approval denial, uncounted never zero, concurrent reconcile, print/RTL/LTR.
+- **Definition of Done:** DoD and Phase 2 gate; ledger/balance/count adjustments reconcile with no critical discrepancy.
+
+## Phase 3 — POS, Payments, Cash Drawers, and Shifts
+
+### TSK-023 — Implement Dedicated POS Checkout and Suspended Sales
+
+- **Task ID / Phase / Milestone / Status:** TSK-023; Phase 3; DM 3.1; **Not Started**.
+- **Title / Purpose / Description:** Build fast barcode/name/code POS with assigned-store cart, authorized quantity/customer, suspend/retrieve, atomic sale, stock movement and thermal/A4 output.
+- **Traceability:** PRC-07, INV-02, POS-01–POS-02, POS-04, NFR-05–NFR-06; US-017; FLW-POS-01–02; UI UI-POS-001–002, UI-POS-006–007; AC-PRC-07, AC-INV-02, AC-POS-01–02, AC-POS-04; SEC-006, SEC-011–013, SEC-017–021, SEC-038.
+- **Dependencies / Required Inputs:** Phase 2 gate; active product/price/stock/branch/store/drawer/shift foundations; approved POS/receipt/hardware workflow.
+- **Database Entities:** `sales`, `sale_lines`, `suspended_sales`, `suspended_sale_lines`, `stock_movements`, `stock_balances`, `customers`, `shifts`, `cash_drawers`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** server product lookup/cart/reprice/state/idempotent approval/movements/suspend actions; full-page POS/history/detail; Blade thermal/A4 invoice.
+- **UI / Flux / Alpine / Vite:** Flux search/combobox/table/numeric/drawer/dialog/toast/badges; small JS for scanner/shortcuts/print only; dedicated lightweight POS Vite entry.
+- **Suggested Packages:** Barcode generation/reader integration only if mature browser/hardware capability needed; PDF output candidate; no POS framework.
+- **Permissions / Validation / Audit / States / Print:** POS/Create/Qty/Customer/Suspend/Retrieve/Print and store scope; priced/stock/shift/drawer/state/duplicate; full context audited; New/Suspended/Approved/Cancelled; thermal/A4.
+- **Manual Browser Verification:** Rapid scanner/keyboard/touch, search, quantities, wrong-store informational lookup/block, unpriced/negative/stale/concurrent stock, customer, suspend/retrieve/expiry/other user, double submit, cart recovery, prints RTL/LTR.
+- **Definition of Done:** DoD; cashier completes/holds/retrieves/prints and sale/stock/linkage reconcile.
+
+### TSK-024 — Implement Discounts, Tax, Payments, Evidence, and Open Price
+
+- **Task ID / Phase / Milestone / Status:** TSK-024; Phase 3; DM 3.2; **Not Started**.
+- **Title / Purpose / Description:** Add one-discount replacement rule, optional invoice tax, cash/manual electronic settlement/evidence, open-price authorization and exact printed totals.
+- **Traceability:** PRC-08, POS-03–POS-06, NFR-01, NFR-04; US-008, US-018; FLW-POS-01, FLW-POS-03; UI UI-POS-001, UI-POS-007, UI-SYS-005; AC-PRC-08, AC-POS-03–06; SEC-006, SEC-015–016, SEC-019–020, SEC-022–024, SEC-027.
+- **Dependencies / Required Inputs:** TSK-023; BLK-008, BLK-013; tax/discount/open-price/payment/evidence/rounding authority.
+- **Database Entities:** `sales`, `sale_lines`, `payments`, `payment_evidence`, `attachments`, `tax_settings`, `price_lines`, `approval_records`, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** deterministic calculations, one-discount invariant, payment/evidence/open-price actions, safe protected files; POS settlement and immutable detail/print.
+- **UI / Flux / Alpine / Vite:** Flux payment drawer/forms/radios/upload/summary/dialog/toast/alerts; Alpine print/file preview only; POS/print assets.
+- **Suggested Packages:** Reuse approved media/upload/PDF capabilities; no gateway package, no discount engine.
+- **Permissions / Validation / Audit / States / Print:** methods/tax/discount/open-price/evidence/approve; range/reason/stack/replacement/totals/file/idempotency; all overrides/payments/files; thermal/A4 exact breakdown.
+- **Manual Browser Verification:** Cash/electronic/mixed if approved, required/unsafe evidence, tax/no-tax, discount replace/no-stack, open price limits/reason/role/offline, rounding/totals, duplicate payment, file access, print.
+- **Definition of Done:** DoD and DM 3.2 criteria; printed/source/calculated totals reconcile.
+
+### TSK-025 — Implement Shift Opening, Cash Movements, Blind Closing, and Variance Review
+
+- **Task ID / Phase / Milestone / Status:** TSK-025; Phase 3; DM 3.3; **Not Started**.
+- **Title / Purpose / Description:** Deliver exclusive drawer shift, opening float, linked payments/cash movements, blind actual submission, expected/variance manager review and thermal/A4 close.
+- **Traceability:** CSH-01–CSH-04, NFR-01–NFR-03; US-024; FLW-CSH-01–03; UI UI-POS-003–005; AC-CSH-01–04; SEC-011–012, SEC-015–020, SEC-027, SEC-037–038.
+- **Dependencies / Required Inputs:** TSK-023–024; drawer allocation, cash-movement/shift/variance/closing/print policy.
+- **Database Entities:** `shifts`, `shift_totals`, `cash_movements`, `cash_drawers`, `payments`, `sales`, `approval_records`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** locked open/close, expected derivation, variance state/approval and immutable totals; shift screens; thermal/A4 close views.
+- **UI / Flux / Alpine / Vite:** Flux Cards/Forms/Money Inputs/Select/Table/Tabs/Timeline/Dialog/Badges; Alpine/browser print only; print assets.
+- **Suggested Packages:** Reuse approved PDF/print capability only.
+- **Permissions / Validation / Audit / States / Print:** Cashier own Open/Actual Submit; Manager Expected/Review/Approve/Export; exclusive drawer/shift, actual completeness, idempotency; amounts/states audited; thermal/A4.
+- **Manual Browser Verification:** Drawer/cashier collision, transaction/movement linkage, blind expected non-exposure (UI/direct response), missing/duplicate submit, variance role/recount/approval, report reconciliation and print.
+- **Definition of Done:** DoD; end-of-shift totals reconcile and no pre-submit expected-value leak.
+
+### TSK-026 — Implement Restricted Offline POS, Synchronization, and Conflict Review
+
+- **Task ID / Phase / Milestone / Status:** TSK-026; Phase 3; DM 3.4; **Not Started**.
+- **Title / Purpose / Description:** Deliver owner-approved device-bound provisional POS queue, restricted offline eligibility, protected/expiring IndexedDB, service-worker messaging, idempotent server sync and explicit conflict disposition.
+- **Traceability:** POS-01–POS-05 offline boundary, NFR-01, NFR-03–NFR-06; US-032; FLW-OFF-01–03; UI UI-OFF-001–003, UI-POS-001; AC-NFR-01, AC-NFR-03–06; SEC-004–005, SEC-011–016, SEC-019–020, SEC-032–036.
+- **Dependencies / Required Inputs:** TSK-023–025; DEC-018/BLK-004; exact devices/limits/price age/evidence/expiry/review/disposition/security.
+- **Database Entities:** `offline_transactions`, `sync_batches`, `sync_conflicts`, `sales`, `payments`, `stock_movements`, `audit_logs`; device enrollment entity to finalize.
+- **Backend / Livewire / Blade Deliverables:** eligibility/signed policy/idempotent sync/accept-reject-conflict/server numbering and correction actions; queue/conflict screens.
+- **UI / Flux / Alpine / Vite:** Flux persistent badges/banners/tables/diff/progress/dialog/timeline; small TypeScript/Alpine for IndexedDB/connectivity/service worker/queue; dedicated versioned POS offline assets.
+- **Suggested Packages:** PWA capability candidate only after security/compatibility review; prefer browser APIs for bounded queue rather than large framework.
+- **Permissions / Validation / Audit / States / Print:** OfflinePOS/Sync/Resolve/Approve; device/user/branch/shift/time/limits/schema/hash/auth/idempotency; every local/sync/conflict event; provisional summary not final invoice until server acceptance.
+- **Manual Browser Verification:** Cash/manual electronic only; block credit/wallet/loyalty redemption/special discount/unpriced/stale; logout/revoke/expiry/device loss/storage full/schema update; retry/interrupted/duplicate sync; server stock/price truth; each conflict disposition/evidence.
+- **Definition of Done:** DoD and owner-enabled scope only; no silent overwrite/duplicate; support/conflict runbook current.
+
+## Phase 4 — Customers, Loyalty, Wallets, Gift Instruments, and Returns
+
+### TSK-027 — Implement Customer Profiles and Shared Loyalty
+
+- **Task ID / Phase / Milestone / Status:** TSK-027; Phase 4; DM 4.1; **Not Started**.
+- **Title / Purpose / Description:** Deliver unique-phone customer/consent/contact/children, authorized unified history and shared activity-rule loyalty earn/redeem/expiry.
+- **Traceability:** MD-06, CUS-01, CUS-03–CUS-04, NFR-01–NFR-03; US-003, US-023; FLW-CUS-01–03; UI UI-CUS-001–003; AC-MD-06, AC-CUS-01, AC-CUS-03–04; SEC-006, SEC-010–012, SEC-015–021, SEC-027.
+- **Dependencies / Required Inputs:** Phase 3 gate; BLK-014; consent/phone normalization/duplicate/children/loyalty rule/rounding/expiry/approval.
+- **Database Entities:** `customers`, `customer_children`, `loyalty_ledger`, sales/party source links, rule/version structures, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** unique profile/duplicate review, purpose scopes, append-only locked loyalty actions; customer list/profile/loyalty screens.
+- **UI / Flux / Alpine / Vite:** Flux Search/Table/Filters/Pagination/Form/Tabs/Cards/Timeline/Badges/Dialog; Alpine none; common assets.
+- **Suggested Packages:** None for loyalty engine; explicit rules. Customer phone library only if mature/necessary after locale review.
+- **Permissions / Validation / Audit / States / Print:** Customer Sensitive/Merge/Export; Loyalty View/Earn/Redeem/Adjust/Approve; phone/consent/source/rule/balance/expiry/idempotency; all access/movements; profile/loyalty statement.
+- **Manual Browser Verification:** New/existing/duplicate phone/merge denial, consent/children privacy, history scope, retail/party rates, earn/redeem/expiry/insufficient/concurrent/offline/duplicate source, RTL/LTR.
+- **Definition of Done:** DoD; duplicates prevented and loyalty ledger/balance/source reconcile.
+
+### TSK-028 — Implement Separated Product and Party Wallets
+
+- **Task ID / Phase / Milestone / Status:** TSK-028; Phase 4; DM 4.2; **Not Started**.
+- **Title / Purpose / Description:** Create independent append-only Product Wallet and Party Wallet data/actions/policies/screens/settlement/reporting with no generic transfer.
+- **Traceability:** MD-06, CUS-01–CUS-02, CUS-04, NFR-01–NFR-03; US-003, US-022; FLW-CUS-04–05; UI UI-CUS-002, UI-CUS-004–005; AC-MD-06, AC-CUS-01–02, AC-CUS-04; SEC-010–021, SEC-027.
+- **Dependencies / Required Inputs:** TSK-027; wallet credit/debt/settlement/adjust/limits/visibility/report policy.
+- **Database Entities:** `product_wallet_ledger`, `party_wallet_ledger`, `customers`, source documents, `approval_records`, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** separately named models/actions/policies/scopes/reconciliation; separate full-page ledger screens and redacted profile tabs.
+- **UI / Flux / Alpine / Vite:** Flux Summary Cards/Tables/Filters/Pagination/Dialog/Timeline/Audit Panel; Alpine none; common assets.
+- **Suggested Packages:** None; do not install/build generic wallet package.
+- **Permissions / Validation / Audit / States / Print:** ProductWallet and PartyWallet distinct rights; source/amount/balance/lock/approval/idempotency; sensitive view/export and every movement; separate statements.
+- **Manual Browser Verification:** Cashier Party Wallet and Party Manager Product Wallet denied via nav/direct/query/export; authorized settlement/correction/concurrency; no transfer; ledger/balance/source reconciliation.
+- **Definition of Done:** DoD and DM 4.2 criterion; physical and policy separation demonstrated.
+
+### TSK-029 — Implement Gift Cards and Gift Receipts
+
+- **Task ID / Phase / Milestone / Status:** TSK-029; Phase 4; DM 4.3; **Not Started**.
+- **Title / Purpose / Description:** Deliver price-free Gift Receipt issue/reprint/use and unique Gift Card issue/balance/partial/full redeem/void/expiry ledger.
+- **Traceability:** POS-07, RET-02, RET-04, NFR-01–NFR-03, NFR-06; US-019, US-021; FLW-POS-04, FLW-RET-03; UI UI-POS-010–011; AC-POS-07, AC-RET-02, AC-RET-04; SEC-011–012, SEC-015–020, SEC-024, SEC-027.
+- **Dependencies / Required Inputs:** TSK-028; Gift Card/Gift Receipt eligibility/validity/holder/void/reprint/format rules.
+- **Database Entities:** `gift_receipts`, `gift_receipt_lines`, `gift_cards`, `gift_card_ledger`, `sales`, `payments`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** unique references/locked ledger/idempotent use/privacy/print actions; list/detail/issue/use screens and Blade outputs.
+- **UI / Flux / Alpine / Vite:** Flux Search/Table/Filters/Pagination/Cards/Money/Date/Dialog/Timeline/Badges; Alpine browser print only; print assets.
+- **Suggested Packages:** Reuse approved barcode/PDF capability for card/receipt rendering if required.
+- **Permissions / Validation / Audit / States / Print:** Issue/Reprint/Validate/Redeem/Void/View; source/eligibility/no-price/unique/balance/expiry/concurrency/reason; all events; Gift Receipt and card issue/use receipt.
+- **Manual Browser Verification:** Price absence, eligible lines, invalid/reused/reprint, unique/concurrent ID/use, partial/full/expired/void/overuse, role/scope/direct access and print RTL/LTR.
+- **Definition of Done:** DoD; every balance/reference/event traceable and private.
+
+### TSK-030 — Implement Returns and Exchanges
+
+- **Task ID / Phase / Milestone / Status:** TSK-030; Phase 4; DM 4.4; **Not Started**.
+- **Title / Purpose / Description:** Validate original invoice/Gift Receipt, inspect condition/approval, then same/different exchange, cash refund, or Gift Card settlement with stock disposition and references.
+- **Traceability:** RET-01–RET-03, NFR-01–NFR-03, NFR-06; US-020; FLW-RET-01–02; UI UI-POS-008–010; AC-RET-01–03; SEC-006, SEC-011–012, SEC-015, SEC-017–024, SEC-027.
+- **Dependencies / Required Inputs:** TSK-029; BLK-013; window/reference exceptions/condition/refund/approval/non-saleable/damage policies.
+- **Database Entities:** `retail_returns`, `retail_return_lines`, `exchanges`, `exchange_lines`, `sales`, `sale_lines`, `payments`, `gift_cards`, `stock_movements`, `stock_balances`, `attachments`, `approval_records`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** source eligibility/over-return/condition/settlement/locked posting and correction actions; stepper screens/detail/outputs.
+- **UI / Flux / Alpine / Vite:** Flux Reference Search/Stepper/Tables/Radios/Upload/Summary/Payment Drawer/Timeline/Dialog/Badges; Alpine scanner/print only; print assets.
+- **Suggested Packages:** Reuse approved media/barcode/PDF capabilities; no generic returns engine.
+- **Permissions / Validation / Audit / States / Print:** Create/Inspect/Refund/Exchange/Approve/Reverse/Print; source/window/qty/value/condition/stock/settlement/limits/idempotency; full audit; return/exchange/refund print.
+- **Manual Browser Verification:** Valid/invalid/Gift source, partial/duplicate/excess, all four outcomes/difference, condition approval, sellable/non-saleable/damaged, concurrent stock/payment, terminal immutable, role/print.
+- **Definition of Done:** DoD and Phase 4 gate; stock/financial/source history reconciles.
+
+## Phase 5 — Party Booking, Operations, and Rental Assets
+
+### TSK-031 — Implement Party Bookings and Working Invoices
+
+- **Task ID / Phase / Milestone / Status:** TSK-031; Phase 5; DM 5.1; **Not Started**.
+- **Title / Purpose / Description:** Deliver party-only booking/calendar, customer/child/schedule/location/contact/plans/responsibilities and editable working invoice frozen at final close.
+- **Traceability:** PTY-01–PTY-03, NFR-01–NFR-03; US-025; FLW-PTY-01–02; UI UI-PTY-001–003; AC-PTY-01–03; SEC-006, SEC-010–015, SEC-017, SEC-019–020, SEC-027.
+- **Dependencies / Required Inputs:** Phase 4 gate; BLK-015; party stores/services/packages/schedule/cancellation/edit/responsibility/price policy.
+- **Database Entities:** `party_bookings`, `party_invoices`, `party_invoice_lines`, `customers`, `customer_children`, `stores`, `document_sequences`, `audit_logs`.
+- **Backend / Livewire / Blade Deliverables:** party-typed state/schedule/conflict and versioned edit actions; booking list/calendar/form and working-invoice editor/detail.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Search/Pagination/Calendar/Form/Date-Time/Combobox/Line Editor/Timeline/Dialog/Badges; Alpine calendar affordance only if needed; print assets.
+- **Suggested Packages:** Calendar capability only if Flux/native cannot meet schedule requirement; no SPA calendar framework by default.
+- **Permissions / Validation / Audit / States / Print:** Party Booking/Invoice Create/Edit/Confirm/Reschedule/Cancel/Print; activity/store/required/timezone/state/line type; every change; booking/working invoice.
+- **Manual Browser Verification:** Retail line/store block, required/contact/child/schedule/timezone, calendar/reschedule/conflict, edit before/freeze after, cancel/permission/direct route, responsive RTL/LTR and print.
+- **Definition of Done:** DoD; booking works without retail financial exposure.
+
+### TSK-032 — Implement Party Payments on Account and Party Balance
+
+- **Task ID / Phase / Milestone / Status:** TSK-032; Phase 5; DM 5.2; **Not Started**.
+- **Title / Purpose / Description:** Post multiple party payments, each with exact PRD receipt label, reconcile party balance and integrate only Party Wallet under approved policy.
+- **Traceability:** CUS-02, CUS-04, PTY-04, NFR-01–NFR-03, NFR-06; US-026; FLW-PTY-03, FLW-CUS-05; UI UI-PTY-004, UI-CUS-005; AC-CUS-02, AC-PTY-04; SEC-011–020, SEC-022–024, SEC-027.
+- **Dependencies / Required Inputs:** TSK-031; DEC-019 and payment/deposit/receipt/evidence/overpayment/Party Wallet policy.
+- **Database Entities:** `party_payments`, `payments`, `party_invoices`, `party_wallet_ledger`, `payment_evidence`, `attachments`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** idempotent party payment/balance actions, receipt numbering/text, evidence and wallet source links; payments screen/ledger; Blade receipt.
+- **UI / Flux / Alpine / Vite:** Flux Summary/Payment Form/Method Select/Upload/Table/Pagination/Dialog/Timeline/Badges; Alpine print only; print assets.
+- **Suggested Packages:** Reuse approved media/PDF capability; no generic deposit/wallet engine.
+- **Permissions / Validation / Audit / States / Print:** PartyPayment Create/Approve/Print and PartyWallet rights; amount/method/source/evidence/idempotency/no Product Wallet; all events; `Payment on Account for Party Invoice No. [number]`.
+- **Manual Browser Verification:** Multiple/partial/duplicate/concurrent/overpayment policy, exact receipt/reprint, evidence, balance/source, Cashier/other activity denial, RTL/LTR/thermal-A4 as approved.
+- **Definition of Done:** DoD; DEC-019 resolved or PRD wording preserved; party balance reconciles.
+
+### TSK-033 — Implement Party Operating Orders and Consumable Movements
+
+- **Task ID / Phase / Milestone / Status:** TSK-033; Phase 5; DM 5.3; **Not Started**.
+- **Title / Purpose / Description:** Create/release/execute party order, assign resources, issue/consume party-store consumables, control additions/removals and reference eligible unused returns.
+- **Traceability:** PTY-05, AST-05, NFR-01–NFR-03; US-027; FLW-PTY-04–05; UI UI-PTY-005–006; AC-PTY-05, AC-AST-05; SEC-006, SEC-011–015, SEC-017, SEC-019–021, SEC-027.
+- **Dependencies / Required Inputs:** TSK-032; operating checklist, party-store mapping, consumables/UOM/availability/return/change/approval policy.
+- **Database Entities:** `party_operating_orders`, `party_operating_order_lines`, `party_consumable_issues`, `party_consumable_lines`, `stock_movements`, `stock_balances`, `approval_records`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** state/version/assignment/change actions, locked issue/return posting; order list/editor and consumable scan/actual screens.
+- **UI / Flux / Alpine / Vite:** Flux Tables/Filters/Form/Line Editor/Assignments/Scan/Numeric/Summary/Timeline/Dialog/Badges; Alpine scanner/shortcuts only; print assets.
+- **Suggested Packages:** Reuse barcode/PDF capability only.
+- **Permissions / Validation / Audit / States / Print:** Create/Edit/Release/Issue/Return/Complete/Override; party/store/stock/fraction/state/reason; all version/movement/assignment events; order/issue/return print.
+- **Manual Browser Verification:** Party-only resources, insufficient/concurrent stock, actuals, authorized add/remove, post-complete block, eligible/excess return, source/balance reconciliation, print/RTL/LTR.
+- **Definition of Done:** DoD; consumable movements are controlled and reconcile.
+
+### TSK-034 — Implement Rental Asset Master, Calendar, Reservation, Checkout, and Return
+
+- **Task ID / Phase / Milestone / Status:** TSK-034; Phase 5; DM 5.4; **Not Started**.
+- **Title / Purpose / Description:** Maintain unique assets separately from consumables, show availability calendar, lock non-overlapping reservations, and capture checkout/return/pre-post condition/status/location.
+- **Traceability:** AST-01–AST-03, NFR-01–NFR-03; US-028; FLW-PTY-06–08; UI UI-PTY-007–012; AC-AST-01–03; SEC-006, SEC-011–013, SEC-015–020, SEC-022–024, SEC-027.
+- **Dependencies / Required Inputs:** TSK-033; BLK-016; asset register/categories/locations/interval buffers/checklists/state/maintenance/loss policies.
+- **Database Entities:** `rental_assets`, `asset_reservations`, `asset_checkouts`, `asset_returns`, `attachments`, `approval_records`, `document_sequences`.
+- **Backend / Livewire / Blade Deliverables:** unique master, interval concurrency/state/actions/documents/condition/evidence; asset list/detail/calendar/reserve/checkout/return/inspect screens.
+- **UI / Flux / Alpine / Vite:** Flux Tables/Filters/Search/Pagination/Calendar/Date-Time/Combobox/Checklists/Radio/Upload/Timeline/Dialog/Badges; Alpine calendar/local capture only if needed; print assets.
+- **Suggested Packages:** Calendar/media/PDF capabilities only after compatibility review; no rental framework.
+- **Permissions / Validation / Audit / States / Print:** Master/Reserve/Override/Checkout/Return/Inspect/Status/Cost View; unique/interval/timezone/buffer/state/location/condition/reference/file; all events; reservation/checkout/return/inspection prints.
+- **Manual Browser Verification:** Separate consumables, duplicate asset, overlapping concurrent intervals/reschedule/cancel, timezone/buffer, wrong state/location/party, required conditions/files, all statuses, print/responsive RTL/LTR.
+- **Definition of Done:** DoD; double booking impossible and complete source history available.
+
+### TSK-035 — Implement Asset Damage, Loss, Maintenance, and Depreciation Review
+
+- **Task ID / Phase / Milestone / Status:** TSK-035; Phase 5; DM 5.4; **Not Started**.
+- **Title / Purpose / Description:** Assess source-linked damage/loss/depreciation, responsibility, evidence, optional cost, approval and final asset state without implying general ledger.
+- **Traceability:** AST-04, NFR-01–NFR-03; US-029; FLW-PTY-09–10; UI UI-PTY-012–014; AC-AST-04; SEC-006, SEC-011–012, SEC-015–020, SEC-022–024, SEC-027.
+- **Dependencies / Required Inputs:** TSK-034; damage/loss/maintenance/depreciation/method/cost/responsibility/approval policy.
+- **Database Entities:** `asset_damage`, `asset_depreciation`, `rental_assets`, `asset_returns`, `party_bookings`, `attachments`, `approval_records`.
+- **Backend / Livewire / Blade Deliverables:** assessment/depreciation state/actions/cost-field policy and immutable history; review lists/details/forms.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Search/Pagination/Before-After Cards/Upload/Money/Select/Timeline/Dialog/Audit Panel; Alpine image comparison only if needed; print assets.
+- **Suggested Packages:** Reuse approved media/PDF capability; no accounting/depreciation engine unless later scope changes.
+- **Permissions / Validation / Audit / States / Print:** Assess/Cost/Edit/Approve/Status/Export; source/party/assessment/evidence/value/method/date/state; full before-after/approval; damage/depreciation report.
+- **Manual Browser Verification:** Missing/duplicate/source, cost redaction, damaged/maintenance/retired/lost/available transitions, approval separation, direct delete/edit denial, history/export/RTL/LTR.
+- **Definition of Done:** DoD; cost/event is operational history only and final status is traceable.
+
+### TSK-036 — Implement Party Final Closure and Settlement
+
+- **Task ID / Phase / Milestone / Status:** TSK-036; Phase 5; DM 5.5; **Not Started**.
+- **Title / Purpose / Description:** Validate readiness, finalize immutable party invoice, reconcile payments on account, Party Wallet, remaining amount/credit and final receipt atomically.
+- **Traceability:** CUS-02, PTY-06, NFR-01–NFR-03, NFR-06; US-026; FLW-PTY-11; UI UI-PTY-015; AC-CUS-02, AC-PTY-06; SEC-011–020, SEC-027.
+- **Dependencies / Required Inputs:** TSK-031–035; final-close/credit/overpayment/Party Wallet/approval/receipt/readiness rules.
+- **Database Entities:** `party_invoices`, `party_invoice_lines`, `party_payments`, `payments`, `party_wallet_ledger`, `party_operating_orders`, asset/consumable sources, `document_sequences`, `approval_records`.
+- **Backend / Livewire / Blade Deliverables:** readiness query, locked idempotent finalization/number/totals/payment/wallet posting and source freeze; settlement page/detail; final Blade invoice/receipt.
+- **UI / Flux / Alpine / Vite:** Flux Checklist/Summary Cards/Tables/Payment/Wallet Panels/Timeline/Dialog/Badges; Alpine print only; print assets.
+- **Suggested Packages:** Reuse approved PDF/print capability.
+- **Permissions / Validation / Audit / States / Print:** Finalize/Settle/Approve/Print; operation/assets/payments/totals/wallet/activity/concurrency/idempotency; full source/result audit; final invoice/receipt.
+- **Manual Browser Verification:** Unresolved asset/order/consumable block, multiple payments, Party Wallet only, Product Wallet denial, remaining/credit, concurrent double close, immutable final/correction path, exact print RTL/LTR.
+- **Definition of Done:** DoD and Phase 5 gate; final party financial/operational record reconciles.
+
+## Phase 6 — Quotations, Reporting, Acceptance, and Launch
+
+### TSK-037 — Implement Standalone Retail and Party Quotations
+
+- **Task ID / Phase / Milestone / Status:** TSK-037; Phase 6; DM 6.1 (Proposed mapping); **Not Started**.
+- **Title / Purpose / Description:** Create typed retail/party quotation with customer/lines/prices/terms/notes/validity/status, print/share and future identity, with no posting or Phase 1 conversion.
+- **Traceability:** QTN-01–QTN-03, NFR-01–NFR-03, NFR-06; US-030; FLW-QTN-01; UI UI-QTN-001; AC-QTN-01–03; SEC-006, SEC-011–013, SEC-017–020, SEC-024, SEC-026–027.
+- **Dependencies / Required Inputs:** Phase 5 gate; DEC-025 owner confirmation; quotation statuses/terms/price authority/share/format.
+- **Database Entities:** `quotations`, `quotation_lines`, `customers`, `document_sequences`, `audit_logs`, attachments if generated artifact tracked.
+- **Backend / Livewire / Blade Deliverables:** typed non-posting state/version/number/actions and explicit no-conversion guard; list/editor/detail; quotation Blade/PDF.
+- **UI / Flux / Alpine / Vite:** Flux Table/Filters/Search/Pagination/Form/Line Editor/Date/Summary/Timeline/Dialog/Badges; Alpine share/print only; print assets.
+- **Suggested Packages:** Reuse approved PDF capability; no conversion/workflow engine.
+- **Permissions / Validation / Audit / States / Print:** Create/Edit/Issue/Print/Share/Cancel; activity/line/price/terms/validity/state; all version/status/output events; quotation PDF/A4.
+- **Manual Browser Verification:** Retail and party cases, mixed line block, valid/expired/status/revision, no stock/reservation/payment/wallet/accounting effect, conversion unavailable, role/export/share/print RTL/LTR.
+- **Definition of Done:** DoD; mapping approved and non-posting behavior demonstrated.
+
+### TSK-038 — Implement Dashboards and Reconciled Report Catalog
+
+- **Task ID / Phase / Milestone / Status:** TSK-038; Phase 6; DM 6.1; **Not Started**.
+- **Title / Purpose / Description:** Deliver role/date/branch/store scoped KPI dashboard and required report groups with formula/source lineage, pagination and drilldown.
+- **Traceability:** RPT-01, RPT-03, NFR-03, NFR-05; US-031; FLW-RPT-01; UI UI-ADM-001, UI-RPT-001; AC-RPT-01, AC-RPT-03, AC-NFR-05; SEC-011–012, SEC-016, SEC-026, SEC-037.
+- **Dependencies / Required Inputs:** Phase 5 gate; BLK-017; formula catalog/access/ranges/layouts and complete source data.
+- **Database Entities:** all source documents/ledgers and purpose-built read models only if justified/proven.
+- **Backend / Livewire / Blade Deliverables:** scoped indexed report queries/formulas/drilldowns; dashboard/report selector/filter/detail pages.
+- **UI / Flux / Alpine / Vite:** Flux Filter Bar/Cards/Charts/Tables/Pagination/Tabs/Badges/Empty/Loading; Alpine none; Vite chart assets only if approved.
+- **Suggested Packages:** One mature chart capability if Flux/native lacks charts; no analytics platform/package without need.
+- **Permissions / Validation / Audit / States / Print:** report/field/cost/margin/branch/store; ranges/filter allow-list/bounded search/formula; sensitive access; dashboard/report PDF/print links.
+- **Manual Browser Verification:** Every required widget/group/filter, source drilldown, empty/error, high volume, formula/ledger reconciliation, cross-role/branch/store/cost denial, responsive RTL/LTR.
+- **Definition of Done:** DoD; each number has an approved formula and reconciles to source.
+
+### TSK-039 — Implement Operational Alerts and Notifications
+
+- **Task ID / Phase / Milestone / Status:** TSK-039; Phase 6; DM 6.1; **Not Started**.
+- **Title / Purpose / Description:** Surface all PRD low/zero/unpriced/price/transfer/count/invoice/shift/party/balance/asset alerts and role-safe notification navigation.
+- **Traceability:** RPT-02, NFR-03, NFR-05; US-031; FLW-RPT-01; UI UI-ADM-001, UI-SYS-007, UI-RPT-001; AC-RPT-02, AC-NFR-03, AC-NFR-05; SEC-011–012, SEC-016, SEC-037.
+- **Dependencies / Required Inputs:** TSK-038; alert thresholds/timing/ownership/dismissal/escalation policy.
+- **Database Entities:** source module tables and alert/read state structures only where persistence is required.
+- **Backend / Livewire / Blade Deliverables:** scoped alert evaluators/queries/scheduler jobs if approved, read/dismiss links; notification list/dashboard widgets.
+- **UI / Flux / Alpine / Vite:** Flux Lists/Tables/Filters/Pagination/Badges/Dropdown/Drawer/Toast/Empty; Alpine none; common assets.
+- **Suggested Packages:** Laravel notifications/scheduler native; no alert engine unless proven necessary.
+- **Permissions / Validation / Audit / States / Print:** source/scope, dismiss/resolve if approved; threshold/duplicate/stale/source existence; sensitive actions audited; no required print.
+- **Manual Browser Verification:** Trigger/clear every alert, source link/scope, duplicate/stale behavior, unauthorized detail, scheduler/empty/error, responsive RTL/LTR.
+- **Definition of Done:** DoD; alert catalog complete and source-correct.
+
+### TSK-040 — Implement PDF/Excel Export Center and Audit Views
+
+- **Task ID / Phase / Milestone / Status:** TSK-040; Phase 6; DM 6.2; **Not Started**.
+- **Title / Purpose / Description:** Provide safe permissioned PDF/Excel generation/download/expiry and append-only audit filters/detail/before-after/export.
+- **Traceability:** RPT-03, NFR-01–NFR-05; US-031–032; FLW-RPT-02–03; UI UI-RPT-002, UI-AUD-001, UI-OFF-003; AC-RPT-03, AC-NFR-01–05; SEC-011–012, SEC-016, SEC-022–029, SEC-037.
+- **Dependencies / Required Inputs:** TSK-038–039; export formats/limits/retention/storage/redaction/audit access.
+- **Database Entities:** `audit_logs`, `attachments` or export artifact entity, all report sources, `sync_conflicts`.
+- **Backend / Livewire / Blade Deliverables:** scoped queued export/artifact authorization/expiry/formula safety and immutable audit query/redaction; export center/audit screens; PDF Blade views.
+- **UI / Flux / Alpine / Vite:** Flux Tables/Filters/Search/Pagination/Progress/Badges/Download/Drawer/Diff/Dialog; Alpine browser download/print only; export/print assets.
+- **Suggested Packages:** One mature Excel and one PDF capability after compatibility/security review; reuse approved audit capability; no duplicates.
+- **Permissions / Validation / Audit / States / Print:** Export format/field/scope/Audit View/Export; range/rows/formulas/redaction/artifact owner/expiry; every request/download/access; PDF/Excel and audit print.
+- **Manual Browser Verification:** Every format/filter/value, large queued/fail/retry/expiry, cross-user/link/field denial, formula injection, audit source/before-after/redaction/immutability, RTL/LTR PDF.
+- **Definition of Done:** DoD and DM 6.2 criteria; exports reconcile and access is controlled.
+
+### TSK-041 — Import and Reconcile Approved Production Master Data
+
+- **Task ID / Phase / Milestone / Status:** TSK-041; Phase 6; DM 6.4; **Not Started**.
+- **Title / Purpose / Description:** Execute controlled validated import/cutover for approved company/branches/stores/drawers/users/products/suppliers/customers/opening stock and supporting masters.
+- **Traceability:** MD-01–MD-06, PRC-01, PUR-01, INV-01, NFR-01–NFR-07; applicable stories/flows; UI import/admin/error screens; applicable ACs; SEC-006, SEC-009–012, SEC-017–021, SEC-022–027, SEC-039.
+- **Dependencies / Required Inputs:** DM 6.3 passed; final signed data/templates/cutoff/opening valuation and maker/checker owners.
+- **Database Entities:** all approved master tables, import batches, `stock_movements`, `stock_balances`, `audit_logs`, `approval_records`, `attachments`.
+- **Backend / Livewire / Blade Deliverables:** reusable approved import paths/staged validation/idempotent cutover/opening-stock source document and reconciliation outputs; import progress/errors/review UI.
+- **UI / Flux / Alpine / Vite:** Reuse admin/product import Flux patterns; Alpine none; common assets.
+- **Suggested Packages:** Reuse approved Excel/import/media capabilities; no second migration tool.
+- **Permissions / Validation / Audit / States / Print:** DataImport/Create/Update/Approve/Export Error; schema/reference/duplicate/cutoff/count/value; complete batch/maker/checker audit; reconciliation reports.
+- **Manual Browser Verification:** Dry review, invalid isolation, duplicate retry, references, counts/totals/opening ledger, cross-scope/user roles, artifact protection, signed reconciliation.
+- **Definition of Done:** DoD; client-approved data and reconciliation with rollback/cutover record.
+
+### TSK-042 — Complete Production Readiness, Devices, Backup, and Training
+
+- **Task ID / Phase / Milestone / Status:** TSK-042; Phase 6; DM 6.4; **Not Started**.
+- **Title / Purpose / Description:** Verify production configuration/secrets/workers/scheduler/storage/monitoring, target branches/scanners/printers, baseline backup/restore, training and operational runbooks.
+- **Traceability:** all requirements, especially NFR-04–NFR-07 and print/device requirements; US-032; all operational flows/screens; AC-NFR-04–07, AC-UI-02–05; SEC-028–040.
+- **Dependencies / Required Inputs:** TSK-041; approved hosting/domain/devices/printers/support/backup/training attendees/runbooks.
+- **Database Entities:** production configuration references, users/scopes, printer configs, backup/health records, audit logs.
+- **Backend / Livewire / Blade Deliverables:** production-safe configuration, supervised workers/scheduler, monitoring/backups/recovery/runbooks; system health/backup UI and user guidance.
+- **UI / Flux / Alpine / Vite:** all production assets/version/cache; Flux system status; approved local-device JS only.
+- **Suggested Packages:** Only already approved backup/monitoring/PWA/PDF/barcode/media/chart packages; final security/license/vulnerability review.
+- **Permissions / Validation / Audit / States / Print:** least privilege, secrets/redaction, device/printer scope, restore ownership; all admin changes; test prints/operational documents.
+- **Manual Browser Verification:** Production roles/config, worker/scheduler/storage/monitoring, scanners/thermal/A4/labels/camera, PWA, baseline backup and isolated restore to RPO/RTO, training walkthroughs.
+- **Definition of Done:** DoD; production readiness checklist and training/backup/restore/device evidence signed.
+
+### TSK-043 — Execute Scenario-Based Manual UAT and Defect Retesting
+
+- **Task ID / Phase / Milestone / Status:** TSK-043; Phase 6; DM 6.3; **Not Started**.
+- **Title / Purpose / Description:** Execute manual UAT across all roles, 72 requirements, source acceptance scenarios, devices, prints, integrity and offline scope; triage/retest defects. This is not an automated-test task.
+- **Traceability:** all 72 PRD IDs, US-001–032, all FLWs/UI screens, all ACs, SEC-001–040.
+- **Dependencies / Required Inputs:** DM 6.2 complete; named UAT owners, approved scenarios/data/devices/evidence repository/severity/sign-off.
+- **Database Entities:** all source data; UAT evidence/defects are operational project records, not invented application tables.
+- **Backend / Livewire / Blade Deliverables:** No new scope; only separately approved defect corrections with updated traceability. All screens/outputs under review.
+- **UI / Flux / Alpine / Vite:** All implemented UI/device behaviors; no new library for UAT.
+- **Suggested Packages:** None; no PHPUnit/Pest/Playwright/Cypress or automated suite.
+- **Permissions / Validation / Audit / States / Print:** verify every role/action/scope/field/state/validation/audit/print; use production-like accounts and protected evidence.
+- **Manual Browser Verification:** Follow `docs/14-test-plan.md` end to end, record actual Pass/Fail/Blocked/evidence, retest original and directly affected regressions; verify RTL/LTR/responsive/offline/backup restore.
+- **Definition of Done:** All agreed UAT scenarios passed, critical defects closed, open items owned, sign-off recorded; automated tests remain Not Created/Not Run.
+
+### TSK-044 — Execute Controlled Go-Live and Operational Handover
+
+- **Task ID / Phase / Milestone / Status:** TSK-044; Phase 6; DM 6.4; **Not Started**.
+- **Title / Purpose / Description:** Perform authorized cutover, final production verification, controlled launch, support monitoring and full operational/client handover.
+- **Traceability:** all requirements and Delivery Criteria; all stories/flows/screens/AC/security items.
+- **Dependencies / Required Inputs:** TSK-041–043 complete; client release approval, final data/config/users/printers/backups/training/support/rollback readiness.
+- **Database Entities:** all production data and source records; baseline reconciliation/audit/backup references.
+- **Backend / Livewire / Blade Deliverables:** release/cutover/rollback/support procedures and actual production deployment under approved runbook; no unapproved scope.
+- **UI / Flux / Alpine / Vite:** production versioned assets and every approved screen/output; no new UI unless separately authorized.
+- **Suggested Packages:** None new at go-live; freeze reviewed dependencies.
+- **Permissions / Validation / Audit / States / Print:** least-privilege production accounts, maker/checker cutover, full audit/monitoring; production statuses; required baseline/operational prints.
+- **Manual Browser Verification:** Final production smoke journeys for each role/module/device/printer, data/ledger/report totals, alerts, backup, monitoring, support escalation and rollback readiness.
+- **Definition of Done:** Client sign-off; no unresolved critical defect; configuration/data/user/printer/backup approved; guidance, evidence, issue register, limitations/owners, recovery and release handoff complete.
+
+## Backlog Status Confirmation
+
+- Total tasks: 44.
+- Task status totals: 1 `In Progress`, 43 `Not Started`.
+- No task exists for creating or running automated tests.
+- Current implementation progress is 1%; no task is complete.
