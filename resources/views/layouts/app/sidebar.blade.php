@@ -18,10 +18,57 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="shopping-cart" :href="route('pos')" :current="request()->routeIs('pos')" wire:navigate>
+                        {{ __('POS') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="device-phone-mobile" :href="route('system.app')" :current="request()->routeIs('system.app')" wire:navigate>
+                        {{ __('System App Shell') }}
+                    </flux:sidebar.item>
+                    @can('manage-settings')
+                        <flux:sidebar.item icon="cog-6-tooth" :href="route('admin.settings')" :current="request()->routeIs('admin.settings')" wire:navigate>
+                            {{ __('System Settings') }}
+                        </flux:sidebar.item>
+                    @endcan
+                    @can('manage-branches-stores')
+                        <flux:sidebar.item icon="building-office-2" :href="route('admin.branches')" :current="request()->routeIs('admin.branches')" wire:navigate>
+                            {{ __('Branches') }}
+                        </flux:sidebar.item>
+                        <flux:sidebar.item icon="building-storefront" :href="route('admin.stores')" :current="request()->routeIs('admin.stores')" wire:navigate>
+                            {{ __('Stores & Mapping') }}
+                        </flux:sidebar.item>
+                        <flux:sidebar.item icon="inbox-stack" :href="route('admin.cash-drawers')" :current="request()->routeIs('admin.cash-drawers')" wire:navigate>
+                            {{ __('Cash Drawers') }}
+                        </flux:sidebar.item>
+                    @endcan
+                    @can('view-authorization-baseline')
+                        <flux:sidebar.item icon="shield-check" :href="route('admin.authorization-baseline')" :current="request()->routeIs('admin.authorization-baseline')" wire:navigate>
+                            {{ __('Authorization Baseline') }}
+                        </flux:sidebar.item>
+                    @endcan
+                    @can('view-platform-status')
+                        <flux:sidebar.item icon="server" :href="route('system.health')" :current="request()->routeIs('system.health')" wire:navigate>
+                            {{ __('System Health') }}
+                        </flux:sidebar.item>
+                    @endcan
+                    @can('view-ui-showcase')
+                        <flux:sidebar.item icon="paint-brush" :href="route('system.ui-showcase')" :current="request()->routeIs('system.ui-showcase')" wire:navigate>
+                            {{ __('UI Pattern Showcase') }}
+                        </flux:sidebar.item>
+                    @endcan
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
+
+            <div class="px-4 py-2 hidden lg:flex items-center justify-between border-t border-zinc-200 dark:border-zinc-800 text-xs">
+                <div x-data="{ online: navigator.onLine }"
+                     x-on:online.window="online = true"
+                     x-on:offline.window="online = false"
+                     class="flex items-center gap-1.5 font-medium">
+                    <span class="size-2 rounded-full" :class="online ? 'bg-emerald-500' : 'bg-amber-500'"></span>
+                    <span x-text="online ? '{{ __('Online') }}' : '{{ __('Offline') }}'" class="text-zinc-600 dark:text-zinc-400"></span>
+                </div>
+            </div>
 
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
         </flux:sidebar>
@@ -31,6 +78,14 @@
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
             <flux:spacer />
+
+            <div x-data="{ online: navigator.onLine }"
+                 x-on:online.window="online = true"
+                 x-on:offline.window="online = false"
+                 class="me-2 flex items-center gap-1 text-xs font-medium">
+                <span class="size-2 rounded-full" :class="online ? 'bg-emerald-500' : 'bg-amber-500'"></span>
+                <span x-text="online ? '{{ __('Online') }}' : '{{ __('Offline') }}'" class="text-zinc-600 dark:text-zinc-400"></span>
+            </div>
 
             <flux:dropdown position="top" align="end">
                 <flux:profile
@@ -62,6 +117,23 @@
                             {{ __('Settings') }}
                         </flux:menu.item>
                     </flux:menu.radio.group>
+
+                    <flux:menu.separator />
+
+                    <form method="POST" action="{{ route('locale.switch') }}" class="w-full">
+                        @csrf
+                        @if (app()->getLocale() === 'ar')
+                            <input type="hidden" name="locale" value="en" />
+                            <flux:menu.item as="button" type="submit" icon="language" class="w-full cursor-pointer">
+                                {{ __('Switch to English') }}
+                            </flux:menu.item>
+                        @else
+                            <input type="hidden" name="locale" value="ar" />
+                            <flux:menu.item as="button" type="submit" icon="language" class="w-full cursor-pointer">
+                                {{ __('Switch to Arabic') }}
+                            </flux:menu.item>
+                        @endif
+                    </form>
 
                     <flux:menu.separator />
 

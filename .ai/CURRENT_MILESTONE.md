@@ -69,4 +69,4 @@ No automated tests were created or run. Manual browser verification has not star
 
 ## Next Action
 
-Continue TSK-001 by resolving production infrastructure inputs and implementing only the approved platform services. TSK-002 remains Not Started until TSK-001 dependency and authentication policy are ready.
+Continue TSK-001 by resolving production infrastructure inputs and implementing only the approved platform services. TSK-007 local cash drawer baseline slice is implemented under DEC-035; BLK-006 remains open for production master data and DM 1.2 completion.

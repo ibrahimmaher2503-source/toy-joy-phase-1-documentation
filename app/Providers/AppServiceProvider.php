@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -24,6 +26,30 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+
+        Gate::before(function (?User $user, string $ability): ?bool {
+            return $user?->is_super_admin ? true : null;
+        });
+
+        Gate::define('view-platform-status', function (?User $user): bool {
+            return $user !== null;
+        });
+
+        Gate::define('view-ui-showcase', function (?User $user): bool {
+            return $user !== null;
+        });
+
+        Gate::define('manage-settings', function (?User $user): bool {
+            return $user?->is_super_admin === true;
+        });
+
+        Gate::define('manage-branches-stores', function (?User $user): bool {
+            return $user?->is_super_admin === true;
+        });
+
+        Gate::define('view-authorization-baseline', function (?User $user): bool {
+            return $user?->is_super_admin === true;
+        });
     }
 
     /**

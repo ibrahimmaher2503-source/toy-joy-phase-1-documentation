@@ -72,3 +72,74 @@ select:focus[data-flux-control] {
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
+
+@media print {
+    /* Hide all web application chrome */
+    [data-flux-sidebar],
+    [data-flux-header],
+    .no-print,
+    header:not(.print-header),
+    nav,
+    button:not(.printable-button) {
+        display: none !important;
+    }
+
+    body {
+        background-color: white !important;
+        color: black !important;
+        font-size: 12pt;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .print-container {
+        width: 100% !important;
+        max-width: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .print-thermal {
+        width: 80mm !important;
+        max-width: 80mm !important;
+        margin: 0 auto !important;
+        padding: 4mm !important;
+        font-size: 10pt;
+    }
+
+    .print-a4-portrait {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        padding: 15mm !important;
+        margin: 0 auto !important;
+    }
+
+    .print-a4-landscape {
+        width: 297mm !important;
+        min-height: 210mm !important;
+        padding: 15mm !important;
+        margin: 0 auto !important;
+    }
+
+    .print-label {
+        width: 50mm !important;
+        height: 30mm !important;
+        padding: 2mm !important;
+        font-size: 8pt;
+    }
+
+    .print-break-inside-avoid {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .print-break-after {
+        page-break-after: always !important;
+        break-after: always !important;
+    }
+}

@@ -2,39 +2,44 @@
 
 ## Current State
 
-TOY & JOY Phase 1 implementation has started. DM 1.1 is In Progress at 10%, overall project progress is 1%, and TSK-001 is the only active task. No task is complete.
+TOY & JOY Phase 1 implementation is In Progress. DM 1.1 is active, overall project progress is 1%, TSK-001 baseline work is paused for inputs, and local TSK-002, TSK-003, and TSK-004 slices are implemented under DEC-032. No task is marked complete because manual browser evidence remains pending.
 
-The final project directory contains the documentation baseline and a runnable Laravel 13 Livewire starter foundation. It uses Flux UI, Tailwind CSS, Vite, Laravel Fortify authentication, passkeys, two-factor security foundations, SQLite for local development, responsive layouts, and locale-aware RTL/LTR document direction.
+The final project directory contains the documentation baseline and a runnable Laravel 13 Livewire starter foundation with Fortify authentication, passkeys, two-factor security foundations, SQLite local development database, responsive layouts, session-backed locale switching, static PWA manifest/service-worker shell, connectivity indicator, shared Blade UI components, print layout placeholders, and locale-aware RTL/LTR document direction.
 
 ## Verified Versions
 
-- PHP 8.4.21
+- PHP 8.3.6
 - Laravel 13.23.0
 - Livewire 4.3.4
 - Flux UI 2.15.0
 - Tailwind CSS 4
 - Vite 8.2.0
-- Node.js 24.15.0
+- Node.js 24.x
 
-## Completed Foundation Work
+## Completed Foundation, Auth, Shell & Shared UI Slice Work
 
 - Official Laravel Livewire scaffold created and placed beside the approved documentation.
-- Composer dependencies installed in the final project directory.
-- npm dependencies installed with a workspace-local npm cache.
-- TOY & JOY application identity configured.
-- Local application key generated.
-- Local SQLite database created and five starter migrations applied.
-- Laravel starter branding replaced with a restrained TOY & JOY shell.
-- Welcome page and authenticated dashboard foundation created.
-- Starter repository and documentation links removed from application navigation.
-- Arabic RTL and English LTR direction support added at the root layout level.
-- Blade templates compiled and Vite production assets built.
+- Composer and npm dependencies installed.
+- Local `.env`, application key, and SQLite database initialized; starter migrations applied.
+- Arabic RTL and English LTR document direction supported at root layout level.
+- Request correlation middleware (`X-Request-ID`) and bilingual safe 403/404/500/503 error pages implemented.
+- System Health screen added at `/admin/system/health`.
+- Non-enumerating password reset link response binding registered in `FortifyServiceProvider` (`FailedPasswordResetLinkRequestResponse`) so password reset requests return generic success messages without exposing account existence.
+- Registered `/forbidden` route in `routes/web.php` rendering `errors.403` with 403 HTTP status code and correlation ID for UI-SYS-009 Permission Denied.
+- Session-backed locale switching (`SetLocale` middleware, `POST /locale` route, `lang/ar.json` and `lang/en.json`) implemented with instant RTL/LTR switching.
+- Local PWA manifest (`public/manifest.json`) and static service-worker shell (`public/sw.js`, registered in `resources/js/app.js`) added with strict no-private-cache policy.
+- Browser-standard connectivity indicator added to application sidebar, mobile header, POS top bar, and PWA system app page.
+- System App Shell screen added at `/system/app` (`UI-SYS-002`) and dedicated POS layout shell added at `/pos` (`UI-OFF-001`).
+- Implemented TSK-004 safe local shared UI foundation slice: reusable Blade components (`x-page-header`, `x-state.empty`, `x-state.loading`, `x-state.error`, `x-state.denied`, `x-status.badge`, `x-status.timeline`, `x-audit-panel`), safe shared print CSS (`@media print` in `app.css`), base print layout (`layouts.print`), and authenticated server-gated pattern showcase screen at `/admin/system/ui-showcase` under `@can('view-ui-showcase')` gate.
+- Implemented TSK-005 safe local settings baseline slice: SQLite-compatible migrations (`companies`, `payment_methods`, `tax_settings`, `document_sequences`, `printer_configurations`, `settings_audit_logs`), Eloquent models, `SaveLocalSettingsAction` DB transactions with request correlation ID, append-only settings audit trail under DEC-033, and authenticated server-gated System Settings screen at `/admin/settings` (`admin.settings`) under `@can('manage-settings')` gate.
+- Implemented TSK-006 safe local branch/store slice: SQLite-compatible migrations (`branches`, `stores`, `branch_selling_stores`), Eloquent models, `SaveBranchAction`, `SaveStoreAction`, `SaveBranchSellingStoreMappingAction`, and Livewire management screens at `/admin/branches` and `/admin/stores` under `@can('manage-branches-stores')` gate.
+- Implemented TSK-007 safe local cash drawer baseline slice: SQLite-compatible migration (`cash_drawers`), `CashDrawer` Eloquent model, `SaveCashDrawerAction`, and Livewire management screen at `/admin/cash-drawers` under `@can('manage-branches-stores')` gate.
 
 ## Verification
 
-Composer validation, package discovery, application key generation, migrations, migration status, Blade compilation, route discovery, environment review, and Vite production build passed. See `.ai/TEST_RESULTS.md` for exact evidence.
+Allowed diagnostics passed: PHP lint (`php -l`), `php artisan migrate --force`, `php artisan migrate:status`, `php artisan route:list`, `php artisan config:clear`, `php artisan view:cache`, `npx vite build`, `git diff --check`, and HTTP curl checks for `/manifest.json`, `/sw.js`, `/pos`, `/system/app`, `/forbidden`, `/login`, `/forgot-password`, `/admin/system/ui-showcase`, `/admin/settings`, `/admin/branches`, `/admin/stores`, and `/admin/cash-drawers` (302 redirecting to `/login` with `X-Request-ID`).
 
-No automated tests were created or run. Manual browser verification has not started.
+Manual browser verification is partial: Firefox visually verified `/login`, `/forgot-password`, and `/forbidden` without credential entry. Password reset submission, login/session regeneration, logout, profile/security updates, POS layout rendering, locale switching, shared UI pattern showcase interactive testing, print layout previews, system settings form updates, branch/store/drawer operations, and full RTL/LTR comparison remain pending.
 
 ## Local Run
 
@@ -44,25 +49,17 @@ From the project root:
 php artisan serve
 ```
 
-The prepared `.env`, SQLite database, dependencies, and built assets are already present. For a fresh environment, follow `README.md`.
-
 ## Critical Boundaries
 
-- Work only inside DM 1.1.
-- Continue TSK-001; do not mark it complete until all listed deliverables and manual verification are accepted.
-- Do not begin DM 1.2.
+- Do not start TSK-008 or later tasks.
+- Do not mark TSK-002 through TSK-007 complete without manual authenticated browser evidence.
 - Do not create or run automated tests under the current owner directive.
-- SQLite is approved only as a local development assumption, not as the production database.
-- Do not infer production hosting, backup, monitoring, device, offline POS, authentication, or role policy.
-- Preserve retail and party separation and Product Wallet and Party Wallet separation.
-
-## Open Inputs
-
-Read `.ai/BLOCKERS.md`. The immediate blockers are production runtime and hosting, storage and backup, monitoring, devices and browsers, offline POS policy, authentication and session policy, and role scope approval.
+- Keep branch/store/drawer/tax/payment/currency/numbering policy as explicit local TBD values without inventing production policies.
 
 ## Recommended Next Action
 
-Obtain the BLK-001 and BLK-002 production infrastructure inputs. Then complete the smallest approved TSK-001 slice for production environment conventions, cache/queue/scheduler, protected storage, error monitoring, backup and restore, and runbooks. Keep TSK-002 Not Started until TSK-001 dependency and the authentication policy are ready.
+Perform full manual browser verification for TSK-002 through TSK-007 scenarios (login, password reset, session regeneration/logout, profile update, POS layout, PWA shell info, UI pattern showcase, system settings updates, branch/store/drawer updates, RTL/LTR layout check), obtain BLK-001/002/005/006/007/008 owner inputs, and prepare for DM 1.3 users/roles/permissions work when authorized.
+
 
 ## Required Reading
 

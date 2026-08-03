@@ -25,7 +25,7 @@ Reuse Laravel, Flux UI, and a single approved mature package where appropriate. 
 
 ### TSK-002 — Implement Authentication, Sessions, and Account Recovery
 
-- **Task ID / Phase / Milestone / Status:** TSK-002; Phase 1; DM 1.1; **Not Started**.
+- **Task ID / Phase / Milestone / Status:** TSK-002; Phase 1; DM 1.1; **In Progress (local development slice under DEC-032; manual verification pending).**
 - **Title / Purpose / Description:** Deliver maintained Laravel session authentication, login, forgot/reset password, logout/revocation, locale/profile basics, and safe denied behavior without a custom auth framework.
 - **Traceability:** NFR-01, NFR-03–NFR-04; US-032; FLW-AUTH-01; UI-AUTH-001–002, UI-SYS-008–009; AC-NFR-01, AC-NFR-03–04; SEC-001–005, SEC-011.
 - **Dependencies / Required Inputs:** TSK-001; BLK-005; identity fields, password/reset/session/MFA/lockout policy.
@@ -39,7 +39,7 @@ Reuse Laravel, Flux UI, and a single approved mature package where appropriate. 
 
 ### TSK-003 — Build Application Layouts and Restricted PWA Shell
 
-- **Task ID / Phase / Milestone / Status:** TSK-003; Phase 1; DM 1.1; **Not Started**.
+- **Task ID / Phase / Milestone / Status:** TSK-003; Phase 1; DM 1.1; **In Progress (Local slice implemented; pending manual browser evidence)**.
 - **Title / Purpose / Description:** Build Auth, Admin, Operations, and lightweight POS layouts in one Laravel app with context navigation, locale/direction, responsive behavior, PWA install/update shell and connectivity state.
 - **Traceability:** NFR-03–NFR-05, NFR-07; US-032; FLW-AUTH-01, FLW-OFF-01; UI UI-SYS-001–002, UI-OFF-001; AC-NFR-03–05, AC-NFR-07, AC-UI-01–04; SEC-011–013, SEC-031–034.
 - **Dependencies / Required Inputs:** TSK-001–002; BLK-003–BLK-004; browsers/devices, PWA/offline decision, context-switch policy.
@@ -53,7 +53,7 @@ Reuse Laravel, Flux UI, and a single approved mature package where appropriate. 
 
 ### TSK-004 — Establish the Shared UI Foundation
 
-- **Task ID / Phase / Milestone / Status:** TSK-004; Phase 1; DM 1.1; **Not Started**.
+- **Task ID / Phase / Milestone / Status:** TSK-004; Phase 1; DM 1.1; **In Progress (Local slice implemented under DEC-032; manual browser verification pending)**.
 - **Title / Purpose / Description:** Implement the limited shared visual language and reusable shell/page/table/form/status/timeline/audit/print patterns using Flux UI first.
 - **Traceability:** NFR-05, NFR-07; US-032; all flows/screens; UI UI-SYS-001, UI-SYS-005–010; AC-UI-01–05; SEC-006–007, SEC-011, SEC-016, SEC-024.
 - **Dependencies / Required Inputs:** TSK-003; approved bilingual font/brand colors if available; Flux version compatibility.
@@ -67,7 +67,7 @@ Reuse Laravel, Flux UI, and a single approved mature package where appropriate. 
 
 ### TSK-005 — Configure Company, Payment, Tax, Numbering, and Printer Settings
 
-- **Task ID / Phase / Milestone / Status:** TSK-005; Phase 1; DM 1.2; **In Progress (owner-authorized temporary sequencing exception; DEC-031)**.
+- **Task ID / Phase / Milestone / Status:** TSK-005; Phase 1; DM 1.2; **In Progress (local development slice implemented under DEC-031/DEC-033; authenticated browser verification pending)**.
 - **Title / Purpose / Description:** Deliver company identity, payment methods, effective tax settings, concurrency-safe numbering configurations, printer/templates and customer-policy settings.
 - **Traceability:** MD-01, NFR-01–NFR-02, NFR-06; US-001; FLW-ADM-05; UI UI-ADM-002, UI-ADM-006–009; AC-MD-01, AC-NFR-01–02, AC-NFR-06; SEC-017–018, SEC-039.
 - **Dependencies / Required Inputs:** Owner-authorized temporary sequencing exception DEC-031 and minimum local audit exception DEC-033; BLK-008 remains Open; company/currency/tax/methods/sequences/printers/templates/policies. DEC-033 authorizes only append-only local audit records for successful TSK-005 settings writes, not approval, attachment, retention/redaction, immutability, or production audit policy. Do not infer unapproved business or production policy.
@@ -81,7 +81,7 @@ Reuse Laravel, Flux UI, and a single approved mature package where appropriate. 
 
 ### TSK-006 — Configure Branches, Stores, and Selling-Store Mapping
 
-- **Task ID / Phase / Milestone / Status:** TSK-006; Phase 1; DM 1.2; **Not Started**.
+- **Task ID / Phase / Milestone / Status:** TSK-006; Phase 1; DM 1.2; **Local slice implemented; production inputs blocked**.
 - **Title / Purpose / Description:** Deliver branch/store masters, types/status, branch selling-store assignment/history, and controlled manager override context.
 - **Traceability:** MD-01, INV-02, NFR-01, NFR-03; US-001, US-013; FLW-ADM-01–02; UI UI-ADM-003–004; AC-MD-01, AC-INV-02; SEC-011–012, SEC-015, SEC-039.
 - **Dependencies / Required Inputs:** TSK-005; BLK-006; approved lists/types/mappings/overrides.
@@ -95,7 +95,8 @@ Reuse Laravel, Flux UI, and a single approved mature package where appropriate. 
 
 ### TSK-007 — Configure Cash Drawer Masters and Assignments
 
-- **Task ID / Phase / Milestone / Status:** TSK-007; Phase 1; DM 1.2; **Not Started**.
+- **Task ID / Phase / Milestone / Status:** TSK-007; Phase 1; DM 1.2; **Local slice implemented under DEC-035; production inputs blocked**.
+
 - **Title / Purpose / Description:** Create branch/store-scoped drawer masters and safe assignment/status lifecycle used later by shifts.
 - **Traceability:** MD-01, CSH-01, NFR-01, NFR-03; US-001, US-024; FLW-ADM-03; UI UI-ADM-005; AC-MD-01, AC-CSH-01; SEC-011–012, SEC-017, SEC-019, SEC-039.
 - **Dependencies / Required Inputs:** TSK-006; approved drawer allocation/codes/status policy.
