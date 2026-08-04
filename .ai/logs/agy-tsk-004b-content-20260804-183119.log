@@ -1,0 +1,41 @@
+### TSK-004B Contextual Page Guide Content Completion — Summary
+
+#### Summary of Work Completed
+1. **Replaced Generic Step Guidance**: Updated `app/Modules/Platform/Support/TutorialRegistry.php` across all 17 registered screens (`UI-SYS-001` through `UI-SYS-004`, `UI-ADM-002` through `UI-ADM-005`, `UI-ADM-010`–`UI-ADM-012`, `UI-CAT-001`–`UI-CAT-004`, `UI-CAT-006`, and `UI-CAT-007`). Every generic step (such as *"Perform the published action shown on this screen"*) was replaced with explicit, bilingual, step-by-step guidance grounded in PRD requirements, user flows, and actual screen views.
+2. **Human-Readable Action Labels**: Mapped all 17 permission keys used across registered guides in `actionLabel()` to clear Arabic and English titles (e.g. `dashboard_reports.view` → *"عرض مؤشرات لوحة التحكم والتقارير / View dashboard indicators and reports"*), ensuring no raw permission key names or generic fallbacks are displayed.
+3. **Bilingual User Flows**: Updated `app/Modules/Platform/Support/UserFlowRegistry.php` so all 13 user flows (`FLW-UI-01`, `FLW-HELP-01`, `FLW-HELP-02`, `FLW-CAT-01`, `FLW-CAT-02`, `FLW-ADM-01`–`FLW-ADM-05`, `FLW-SYS-01`–`FLW-SYS-03`) provide fully localized (`ar`/`en`) step text, actors, preconditions, triggers, alternate paths, failure paths, and audit expectations.
+4. **Layout Alignment**: Updated `resources/views/platform/help/screen.blade.php` and `resources/views/platform/help/flow.blade.php` closing tags to `</x-layouts::app>`, fixing the structural bug where desktop full-guide content rendered below the sidebar.
+5. **Alpine JS Rendering Protection**: Enhanced the `text(value)` helper in `resources/views/components/platform/dashboard-tools.blade.php` to handle string, object `{ar, en}`, and array text structures without nested `Array` or `[object Object]` text leakage. Added explicit DOM selector check in `startTour()` to safely skip tours when no target elements exist.
+6. **Project Reconciliation**: Reconciled `.ai/TEST_RESULTS.md`, `.ai/CURRENT_TASK.md`, and `.ai/SESSION_SUMMARY.md`.
+
+---
+
+#### Modified Files
+- [`app/Modules/Platform/Support/TutorialRegistry.php`](file:///home/ubuntu/toy-joy-phase-1-documentation/app/Modules/Platform/Support/TutorialRegistry.php)
+- [`app/Modules/Platform/Support/UserFlowRegistry.php`](file:///home/ubuntu/toy-joy-phase-1-documentation/app/Modules/Platform/Support/UserFlowRegistry.php)
+- [`resources/views/platform/help/screen.blade.php`](file:///home/ubuntu/toy-joy-phase-1-documentation/resources/views/platform/help/screen.blade.php)
+- [`resources/views/platform/help/flow.blade.php`](file:///home/ubuntu/toy-joy-phase-1-documentation/resources/views/platform/help/flow.blade.php)
+- [`resources/views/components/platform/dashboard-tools.blade.php`](file:///home/ubuntu/toy-joy-phase-1-documentation/resources/views/components/platform/dashboard-tools.blade.php)
+- [`.ai/TEST_RESULTS.md`](file:///home/ubuntu/toy-joy-phase-1-documentation/.ai/TEST_RESULTS.md)
+- [`.ai/CURRENT_TASK.md`](file:///home/ubuntu/toy-joy-phase-1-documentation/.ai/CURRENT_TASK.md)
+- [`.ai/SESSION_SUMMARY.md`](file:///home/ubuntu/toy-joy-phase-1-documentation/.ai/SESSION_SUMMARY.md)
+
+---
+
+#### Verification Results
+1. **PHP Syntax Check (`php -l`)**: Passed with 0 syntax errors on all modified PHP classes.
+2. **Blade View Cache (`php artisan view:cache --no-ansi`)**: Passed with 0 errors (`INFO Blade templates cached successfully`).
+3. **Route Discovery (`php artisan route:list --no-ansi`)**: 80 routes registered cleanly without errors.
+4. **Vite Production Build (`npm run build`)**: Asset compilation succeeded in 1.39s (`public/build/assets/app-H8MnZWrB.css`, `public/build/assets/app-CfV73nN-.js`).
+5. **Git Whitespace (`git diff --check`)**: Passed with 0 whitespace issues.
+6. **Registry Smoke Check**: 17 registered screens, 13 user flows, 0 broken flow references, and zero invalid localized string shapes.
+7. **Rendered HTML Inspection**:
+   - `GET /help/screens/UI-CAT-004` (Full Guide) & `GET /help/flows/FLW-CAT-02` (User Flow): Rendered inside `<x-layouts::app>` layout.
+   - Zero `Array` string leakage in rendered HTML text nodes.
+   - Zero raw permission keys exposed in user-facing copy.
+
+---
+
+#### Remaining Limitations
+- **Four-Role Permission Matrix Evidence**: Real browser evidence across all four canonical roles (Admin, Cashier, Reviewer, No Access) remains open until UAT browser runs occur.
+- **Task Status**: TSK-004B remains **In Progress**. No git commit or push was performed.
