@@ -1,0 +1,47 @@
+[
+  {
+    "username": "demo-reviewer",
+    "hasNav": true,
+    "status": 200,
+    "url": "http://127.0.0.1:8092/admin/audit",
+    "containsAuditEvent": true,
+    "bodyPreview": "TOY & JOY\nDashboard\nDashboard\nPlatform\nAudit Logs\nSystem Health\nSystem App Shell\nUI Pattern Showcase\nOnline\nLR\nLocal Demo Reviewer\nAudit logs\nAppend-only, permission-scoped operational history with protected before and after values.\nAudit events\n\nFilter visible history by event, source, scope, actor, or request ID.\n\nSearch\nCategory\nAll categories\nEvent\nAll events\nActor\nAll actors\nBranch\nAll visible branches\nStore\nAll visible stores\nFrom date\nTo date",
+    "consoleErrors": []
+  },
+  {
+    "username": "demo-branch-manager",
+    "hasNav": false,
+    "status": 403,
+    "url": "http://127.0.0.1:8092/admin/audit",
+    "containsAuditEvent": false,
+    "bodyPreview": "غير مصرح بالوصول\n\nACCESS DENIED (403)\n\nليس لديك الصلاحية الكافية للوصول إلى هذه الصفحة أو تنفيذ هذا الإجراء.\n\nID:\ncc260dfb-68aa-42bc-a01b-7999e279c176\nالعودة للرئيسية / Return to Dashboard",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    ]
+  },
+  {
+    "username": "demo-cashier",
+    "hasNav": false,
+    "status": 403,
+    "url": "http://127.0.0.1:8092/admin/audit",
+    "containsAuditEvent": false,
+    "bodyPreview": "غير مصرح بالوصول\n\nACCESS DENIED (403)\n\nليس لديك الصلاحية الكافية للوصول إلى هذه الصفحة أو تنفيذ هذا الإجراء.\n\nID:\n92cdc886-997c-4927-9190-bf8cb3e3a0d9\nالعودة للرئيسية / Return to Dashboard",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    ]
+  },
+  {
+    "username": "demo-no-access",
+    "hasNav": false,
+    "status": 403,
+    "url": "http://127.0.0.1:8092/admin/audit",
+    "containsAuditEvent": false,
+    "bodyPreview": "غير مصرح بالوصول\n\nACCESS DENIED (403)\n\nليس لديك الصلاحية الكافية للوصول إلى هذه الصفحة أو تنفيذ هذا الإجراء.\n\nID:\n2e0a128e-59ef-4fff-b740-d0cfe6025083\nالعودة للرئيسية / Return to Dashboard",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    ]
+  }
+]

@@ -1,0 +1,283 @@
+{
+  "screenshots": [
+    "dashboard-ar-1440.png",
+    "pos-ar-1440.png",
+    "system-app-ar-1440.png",
+    "system-health-ar-1440.png",
+    "ui-showcase-ar-1440.png",
+    "settings-ar-1440.png",
+    "branches-ar-1440.png",
+    "stores-ar-1440.png",
+    "cash-drawers-ar-1440.png",
+    "authorization-baseline-ar-1440.png",
+    "pos-ar-390.png",
+    "system-app-ar-390.png",
+    "ui-showcase-ar-390.png",
+    "settings-ar-390.png",
+    "branches-ar-390.png",
+    "stores-ar-390.png",
+    "cash-drawers-ar-390.png",
+    "dashboard-en-1440.png",
+    "pos-en-1440.png",
+    "settings-en-1440.png",
+    "branches-en-1440.png",
+    "stores-en-1440.png",
+    "cash-drawers-en-1440.png"
+  ],
+  "checks": [
+    {
+      "name": "dashboard",
+      "route": "/dashboard",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "pos",
+      "route": "/pos",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "system-app",
+      "route": "/system/app",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "system-health",
+      "route": "/admin/system/health",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ui-showcase",
+      "route": "/admin/system/ui-showcase",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "settings",
+      "route": "/admin/settings",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "branches",
+      "route": "/admin/branches",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "stores",
+      "route": "/admin/stores",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "cash-drawers",
+      "route": "/admin/cash-drawers",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "authorization-baseline",
+      "route": "/admin/authorization-baseline",
+      "locale": "ar",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "pos",
+      "route": "/pos",
+      "locale": "ar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "system-app",
+      "route": "/system/app",
+      "locale": "ar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ui-showcase",
+      "route": "/admin/system/ui-showcase",
+      "locale": "ar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "settings",
+      "route": "/admin/settings",
+      "locale": "ar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "branches",
+      "route": "/admin/branches",
+      "locale": "ar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "stores",
+      "route": "/admin/stores",
+      "locale": "ar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "cash-drawers",
+      "route": "/admin/cash-drawers",
+      "locale": "ar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dir": "rtl",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "dashboard",
+      "route": "/dashboard",
+      "locale": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "ltr",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "pos",
+      "route": "/pos",
+      "locale": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "ltr",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "settings",
+      "route": "/admin/settings",
+      "locale": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "ltr",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "branches",
+      "route": "/admin/branches",
+      "locale": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "ltr",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "stores",
+      "route": "/admin/stores",
+      "locale": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "ltr",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "cash-drawers",
+      "route": "/admin/cash-drawers",
+      "locale": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dir": "ltr",
+      "horizontalOverflow": false
+    }
+  ],
+  "consoleErrors": []
+}

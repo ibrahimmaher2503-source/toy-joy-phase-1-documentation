@@ -1,0 +1,13 @@
+{
+  "before": {
+    "cairo": "true",
+    "giza": "false"
+  },
+  "selected": {
+    "cairo": "false",
+    "giza": "true"
+  },
+  "modalOpen": 0,
+  "errors": [],
+  "failed": []
+}

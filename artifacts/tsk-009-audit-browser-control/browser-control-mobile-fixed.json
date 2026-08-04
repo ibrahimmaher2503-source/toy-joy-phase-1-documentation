@@ -1,0 +1,11 @@
+{
+  "bodyText": "TOY & JOY\nلوحة التحكم\nلوحة التحكم\nPlatform\nSystem Settings\nنقطة البيع\nBranches\nStores & Mapping\nCash Drawers\nأساس الصلاحيات والأدوار\nAudit Logs\nصحة النظام\nغلاف التطبيق النظامي\nUI Pattern Showcase\nLA\nLocal Demo Administrator\nمتصل\nLA\nAudit logs\nAppend-only, permission-scoped operational history with protected before and after values.\nAudit events\n\nFilter visible history by event, source, scope, actor, or request ID.\n\nSearch\nCategory\nAll categories\nAuthorization\nEvent\nAll events\nupdate_user_authorization\nActor\nAll actors\nLocal Demo Administrator\nBranch\nAll visible branches\nDEMO-CAI - فرع القاهرة التجريبي\nStore\nAll visible stores\nDEMO-SELL - متجر البيع التجريبي\nDEMO-WH - مخزن تجريبي\nFrom date\nTo date\nupdate_user_authorization\nupdate_user_authorization\n2026-08-03 15:21\nActor\nLocal Demo Administrator\nSource\nlegacy_settings:user_authorization #1\nScope\nGlobal\nView\nupdate_user_authorization\nupdate_user_authorization\n2026-08-03 15:21\nActor\nSystem\nSource\nlegacy_settings:user_authorization #1\nScope\nGlobal\nView",
+  "viewButtons": 2,
+  "viewport": {
+    "documentWidth": 390,
+    "viewportWidth": 390,
+    "bodyWidth": 390
+  },
+  "consoleErrors": [],
+  "failedResponses": []
+}

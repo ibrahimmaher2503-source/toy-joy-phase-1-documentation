@@ -1,0 +1,547 @@
+{
+  "generatedAt": "2026-08-03T21:16:53.122Z",
+  "screens": [
+    {
+      "path": "/dashboard",
+      "name": "27-dashboard-ar-desktop.png",
+      "status": 200,
+      "dir": "rtl",
+      "lang": "ar",
+      "width": 1440,
+      "height": 900,
+      "documentWidth": 1440,
+      "bodyWidth": 1440
+    },
+    {
+      "path": "/admin/settings",
+      "name": "28-settings-ar-desktop.png",
+      "status": 200,
+      "dir": "rtl",
+      "lang": "ar",
+      "width": 1440,
+      "height": 900,
+      "documentWidth": 1440,
+      "bodyWidth": 1440
+    },
+    {
+      "path": "/admin/branches",
+      "name": "29-branches-ar-desktop.png",
+      "status": 200,
+      "dir": "rtl",
+      "lang": "ar",
+      "width": 1440,
+      "height": 900,
+      "documentWidth": 1440,
+      "bodyWidth": 1440
+    },
+    {
+      "path": "/admin/stores",
+      "name": "30-stores-ar-desktop.png",
+      "status": 200,
+      "dir": "rtl",
+      "lang": "ar",
+      "width": 1440,
+      "height": 900,
+      "documentWidth": 1440,
+      "bodyWidth": 1440
+    },
+    {
+      "path": "/admin/cash-drawers",
+      "name": "31-drawers-ar-desktop.png",
+      "status": 200,
+      "dir": "rtl",
+      "lang": "ar",
+      "width": 1440,
+      "height": 900,
+      "documentWidth": 1440,
+      "bodyWidth": 1440
+    },
+    {
+      "path": "/pos",
+      "name": "32-pos-ar-desktop.png",
+      "status": 200,
+      "dir": "rtl",
+      "lang": "ar",
+      "width": 1440,
+      "height": 900,
+      "documentWidth": 1440,
+      "bodyWidth": 1440
+    },
+    {
+      "path": "/dashboard",
+      "name": "33-dashboard-en-mobile.png",
+      "status": 200,
+      "dir": "ltr",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "bodyWidth": 390
+    },
+    {
+      "path": "/admin/settings",
+      "name": "34-settings-en-mobile.png",
+      "status": 200,
+      "dir": "ltr",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "bodyWidth": 390
+    },
+    {
+      "path": "/admin/branches",
+      "name": "35-branches-en-mobile.png",
+      "status": 200,
+      "dir": "ltr",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "bodyWidth": 390
+    },
+    {
+      "path": "/admin/stores",
+      "name": "36-stores-en-mobile.png",
+      "status": 200,
+      "dir": "ltr",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "bodyWidth": 390
+    },
+    {
+      "path": "/admin/cash-drawers",
+      "name": "37-drawers-en-mobile.png",
+      "status": 200,
+      "dir": "ltr",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "bodyWidth": 390
+    },
+    {
+      "path": "/pos",
+      "name": "38-pos-en-mobile.png",
+      "status": 200,
+      "dir": "ltr",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "bodyWidth": 390
+    }
+  ],
+  "pwa": {
+    "offlineText": "TOY & JOY\nDashboard\nDashboard\nPlatform\nSystem Settings\nPOS\nBranches\nStores & Mapping\nCash Drawers\nAuthorization Baseline\nAudit Logs\nSystem Health\nSystem App Shell\nUI Pattern Showcase\nLA\nLocal Demo Administrator\nOffline\nLA\nPWA Shell & Status\nLocal application shell capabilities, network connectivity state, and non-sensitive static PWA cache policy.\nOffline\nConnectivity Status\n\nBrowser-standard netw",
+    "onlineText": "TOY & JOY\nDashboard\nDashboard\nPlatform\nSystem Settings\nPOS\nBranches\nStores & Mapping\nCash Drawers\nAuthorization Baseline\nAudit Logs\nSystem Health\nSystem App Shell\nUI Pattern Showcase\nLA\nLocal Demo Administrator\nOnline\nLA\nPWA Shell & Status\nLocal application shell capabilities, network connectivity state, and non-sensitive static PWA cache policy.\nOnline\nConnectivity Status\n\nBrowser-standard networ",
+    "manifest": {
+      "status": 200,
+      "body": {
+        "name": "TOY & JOY Operational Platform",
+        "short_name": "TOY & JOY",
+        "description": "Arabic-first retail and party operations platform",
+        "start_url": "/",
+        "display": "standalone",
+        "background_color": "#ffffff",
+        "theme_color": "#0d9488",
+        "icons": [
+          {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+          }
+        ]
+      }
+    },
+    "sw": {
+      "status": 200,
+      "hasFetch": true,
+      "privateBoundary": true,
+      "snippet": "// TOY & JOY Minimal Static Service Worker Shell\n// Strictly no caching of authenticated/private responses or dynamic routes.\n\nconst CACHE_NAME = 'toy-joy-shell-v1';\nconst STATIC_ASSETS = [\n    '/favicon.ico',\n    '/favicon.svg',\n    '/apple-touch-icon.png',\n    '/manifest.json'\n];\n\nself.addEventListener('install', (event) => {\n    event.waitUntil(\n        caches.open(CACHE_NAME).then((cache) => c"
+    }
+  },
+  "roles": [
+    {
+      "label": "Branch Manager",
+      "allow": [
+        {
+          "path": "/admin/branches",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/admin/branches"
+        },
+        {
+          "path": "/admin/stores",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/admin/stores"
+        },
+        {
+          "path": "/pos",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/pos"
+        }
+      ],
+      "deny": [
+        {
+          "path": "/dashboard",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/dashboard",
+          "denied": true
+        },
+        {
+          "path": "/admin/settings",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/settings",
+          "denied": true
+        },
+        {
+          "path": "/admin/cash-drawers",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/cash-drawers",
+          "denied": true
+        },
+        {
+          "path": "/admin/authorization-baseline",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/authorization-baseline",
+          "denied": true
+        },
+        {
+          "path": "/admin/audit",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/audit",
+          "denied": true
+        },
+        {
+          "path": "/admin/system/health",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/system/health",
+          "denied": true
+        }
+      ],
+      "nav": "غير مصرح بالوصول\n\nACCESS DENIED (403)\n\nليس لديك الصلاحية الكافية للوصول إلى هذه الصفحة أو تنفيذ هذا الإجراء.\n\nID:\n38fc9314-7658-45a0-b05c-0cf3fe890776\nالعودة للرئيسية / Return to Dashboard"
+    },
+    {
+      "label": "Cashier",
+      "allow": [
+        {
+          "path": "/pos",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/pos"
+        }
+      ],
+      "deny": [
+        {
+          "path": "/dashboard",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/dashboard",
+          "denied": true
+        },
+        {
+          "path": "/admin/settings",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/settings",
+          "denied": true
+        },
+        {
+          "path": "/admin/branches",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/branches",
+          "denied": true
+        },
+        {
+          "path": "/admin/stores",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/stores",
+          "denied": true
+        },
+        {
+          "path": "/admin/cash-drawers",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/cash-drawers",
+          "denied": true
+        },
+        {
+          "path": "/admin/authorization-baseline",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/authorization-baseline",
+          "denied": true
+        },
+        {
+          "path": "/admin/audit",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/audit",
+          "denied": true
+        }
+      ],
+      "nav": "غير مصرح بالوصول\n\nACCESS DENIED (403)\n\nليس لديك الصلاحية الكافية للوصول إلى هذه الصفحة أو تنفيذ هذا الإجراء.\n\nID:\n5f755656-8f35-41a7-8de9-f9f80c67c26e\nالعودة للرئيسية / Return to Dashboard"
+    },
+    {
+      "label": "Accountant / Reviewer",
+      "allow": [
+        {
+          "path": "/dashboard",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/dashboard"
+        },
+        {
+          "path": "/admin/audit",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/admin/audit"
+        },
+        {
+          "path": "/admin/system/health",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/admin/system/health"
+        }
+      ],
+      "deny": [
+        {
+          "path": "/pos",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/pos",
+          "denied": false
+        },
+        {
+          "path": "/admin/settings",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/settings",
+          "denied": true
+        },
+        {
+          "path": "/admin/branches",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/admin/branches",
+          "denied": false
+        },
+        {
+          "path": "/admin/stores",
+          "status": 200,
+          "url": "http://127.0.0.1:8093/admin/stores",
+          "denied": false
+        },
+        {
+          "path": "/admin/cash-drawers",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/cash-drawers",
+          "denied": true
+        },
+        {
+          "path": "/admin/authorization-baseline",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/authorization-baseline",
+          "denied": true
+        }
+      ],
+      "nav": "TOY & JOY\nDashboard\nDashboard\nPlatform\nPOS\nBranches\nStores & Mapping\nAudit Logs\nSystem Health\nSystem App Shell\nUI Pattern Showcase\nOnline\nLR\nLocal Demo Reviewer\nDM 1.1 in progress\nPlatform foundation\nOperations workspace\n\nThe shared application foundation is ready for authentication, operational modules, and role-scoped workflows.\n\nFoundation status\n\nVerified building blocks available in the current development environment.\n\nApplication shell\nResponsive sidebar, mobile navigation, and shared page structure.\nAvailable\nAuthentication\nSign in, registration, password reset, verification, passkeys, and account security.\nAvailable\nLanguage direction\nLocale-aware document direction supports Arabic RTL and English LTR layouts.\nConfigured\nContinue platform setup\n\nAccount settings are available while roles, audit controls, and infrastructure decisions remain in the active milestone.\n\nOpen account settings"
+    },
+    {
+      "label": "No Access",
+      "allow": [],
+      "deny": [
+        {
+          "path": "/dashboard",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/dashboard",
+          "denied": true
+        },
+        {
+          "path": "/pos",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/pos",
+          "denied": true
+        },
+        {
+          "path": "/admin/settings",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/settings",
+          "denied": true
+        },
+        {
+          "path": "/admin/branches",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/branches",
+          "denied": true
+        },
+        {
+          "path": "/admin/stores",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/stores",
+          "denied": true
+        },
+        {
+          "path": "/admin/cash-drawers",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/cash-drawers",
+          "denied": true
+        },
+        {
+          "path": "/admin/authorization-baseline",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/authorization-baseline",
+          "denied": true
+        },
+        {
+          "path": "/admin/audit",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/audit",
+          "denied": true
+        },
+        {
+          "path": "/admin/system/health",
+          "status": 403,
+          "url": "http://127.0.0.1:8093/admin/system/health",
+          "denied": true
+        }
+      ],
+      "nav": "غير مصرح بالوصول\n\nACCESS DENIED (403)\n\nليس لديك الصلاحية الكافية للوصول إلى هذه الصفحة أو تنفيذ هذا الإجراء.\n\nID:\n1aea4104-7396-4f24-8e28-17d194f15976\nالعودة للرئيسية / Return to Dashboard"
+    }
+  ],
+  "console": [
+    {
+      "label": "Branch Manager",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/dashboard"
+    },
+    {
+      "label": "Branch Manager",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/dashboard"
+    },
+    {
+      "label": "Branch Manager",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/settings"
+    },
+    {
+      "label": "Branch Manager",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/cash-drawers"
+    },
+    {
+      "label": "Branch Manager",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/authorization-baseline"
+    },
+    {
+      "label": "Branch Manager",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/audit"
+    },
+    {
+      "label": "Branch Manager",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/system/health"
+    },
+    {
+      "label": "Cashier",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/dashboard"
+    },
+    {
+      "label": "Cashier",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/dashboard"
+    },
+    {
+      "label": "Cashier",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/settings"
+    },
+    {
+      "label": "Cashier",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/branches"
+    },
+    {
+      "label": "Cashier",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/stores"
+    },
+    {
+      "label": "Cashier",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/cash-drawers"
+    },
+    {
+      "label": "Cashier",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/authorization-baseline"
+    },
+    {
+      "label": "Cashier",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/audit"
+    },
+    {
+      "label": "Accountant / Reviewer",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/settings"
+    },
+    {
+      "label": "Accountant / Reviewer",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/cash-drawers"
+    },
+    {
+      "label": "Accountant / Reviewer",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/authorization-baseline"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/dashboard"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/dashboard"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/pos"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/settings"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/branches"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/stores"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/cash-drawers"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/authorization-baseline"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/audit"
+    },
+    {
+      "label": "No Access",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+      "url": "http://127.0.0.1:8093/admin/system/health"
+    }
+  ],
+  "network": [],
+  "pageErrors": []
+}

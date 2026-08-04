@@ -1,0 +1,56 @@
+[
+  {
+    "label": "TSK-005 tax create short code",
+    "success": true,
+    "validation": false,
+    "visibleCode": []
+  },
+  {
+    "label": "TSK-006 branch create",
+    "success": true,
+    "validation": false,
+    "visibleCode": []
+  },
+  {
+    "label": "TSK-006 branch code visible",
+    "observed": true
+  },
+  {
+    "label": "TSK-006 duplicate branch",
+    "success": true,
+    "validation": false,
+    "visibleCode": []
+  },
+  {
+    "label": "TSK-006 store create",
+    "success": true,
+    "validation": false,
+    "visibleCode": []
+  },
+  {
+    "label": "TSK-006 store code visible",
+    "observed": true
+  },
+  {
+    "label": "TSK-006 duplicate store",
+    "success": true,
+    "validation": false,
+    "visibleCode": []
+  },
+  {
+    "label": "TSK-007 required code validation",
+    "success": false,
+    "validation": false,
+    "visibleCode": []
+  },
+  {
+    "label": "TSK-007 drawer create",
+    "success": true,
+    "validation": false,
+    "visibleCode": []
+  },
+  {
+    "label": "TSK-007 drawer code visible",
+    "observed": true
+  }
+]

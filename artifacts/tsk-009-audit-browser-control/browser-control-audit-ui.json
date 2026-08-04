@@ -1,0 +1,17 @@
+{
+  "initialRows": 2,
+  "searchRows": 1,
+  "eventRows": 2,
+  "dialogText": "NO_DIALOG_ROLE",
+  "exposedSecretTerms": [
+    "token"
+  ],
+  "rtl": "rtl",
+  "mobileDimensions": {
+    "documentWidth": 390,
+    "viewportWidth": 390,
+    "bodyWidth": 390
+  },
+  "consoleErrors": [],
+  "failedResponses": []
+}

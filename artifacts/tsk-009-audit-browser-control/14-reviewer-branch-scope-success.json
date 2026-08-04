@@ -1,0 +1,16 @@
+{
+  "modalOpen": 0,
+  "systemAdminError": 0,
+  "updateResponses": [
+    {
+      "url": "http://127.0.0.1:8092/livewire-6bf7831b/update",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/livewire-6bf7831b/update",
+      "status": 200
+    }
+  ],
+  "consoleErrors": [],
+  "failed": []
+}

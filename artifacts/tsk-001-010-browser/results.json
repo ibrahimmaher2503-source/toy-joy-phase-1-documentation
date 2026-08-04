@@ -1,0 +1,735 @@
+{
+  "baseUrl": "http://127.0.0.1:8093",
+  "startedAt": "2026-08-03T22:14:40.024Z",
+  "screenshots": [
+    "tsk002-login-desktop-ltr.png",
+    "tsk002-forgot-password-desktop-ltr.png",
+    "tsk002-login-validation.png",
+    "tsk002-login-invalid-credentials.png",
+    "tsk001-404-desktop.png",
+    "tsk001-403-desktop.png",
+    "tsk001-403-mobile-rtl.png",
+    "ltr-desktop-dashboard.png",
+    "ltr-desktop-settings.png",
+    "ltr-desktop-branches.png",
+    "ltr-desktop-stores.png",
+    "ltr-desktop-cash-drawers.png",
+    "ltr-desktop-authorization-baseline.png",
+    "ltr-desktop-audit.png",
+    "ltr-desktop-system-health.png",
+    "ltr-desktop-ui-showcase.png",
+    "ltr-desktop-pos.png",
+    "rtl-desktop-dashboard.png",
+    "rtl-desktop-settings.png",
+    "rtl-desktop-branches.png",
+    "rtl-desktop-stores.png",
+    "rtl-desktop-cash-drawers.png",
+    "rtl-desktop-authorization-baseline.png",
+    "rtl-desktop-audit.png",
+    "rtl-desktop-system-health.png",
+    "rtl-desktop-ui-showcase.png",
+    "rtl-desktop-pos.png",
+    "rtl-mobile-dashboard.png",
+    "rtl-mobile-settings.png",
+    "rtl-mobile-branches.png",
+    "rtl-mobile-stores.png",
+    "rtl-mobile-cash-drawers.png",
+    "rtl-mobile-authorization-baseline.png",
+    "rtl-mobile-audit.png",
+    "rtl-mobile-system-health.png",
+    "rtl-mobile-ui-showcase.png",
+    "rtl-mobile-pos.png",
+    "rtl-tablet-branches.png",
+    "rtl-tablet-audit.png",
+    "tsk009-audit-detail-modal.png",
+    "tsk004-ui-showcase-mobile.png",
+    "tsk008-cashier-pos.png",
+    "tsk008-cashier-denied-settings.png",
+    "tsk008-cashier-denied-audit.png",
+    "tsk006-manager-branches-rtl.png",
+    "tsk006-manager-denied-drawers.png",
+    "tsk009-reviewer-audit.png",
+    "tsk009-reviewer-denied-branches.png"
+  ],
+  "checks": [
+    {
+      "name": "tsk002-login-desktop-ltr",
+      "route": "/login",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Log in - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk002-forgot-password-desktop-ltr",
+      "route": "/forgot-password",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Forgot password - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk002-login-empty-submit",
+      "route": "/login",
+      "validationVisible": false
+    },
+    {
+      "name": "tsk002-invalid-credentials",
+      "route": "/login",
+      "stillOnLogin": true,
+      "genericError": true
+    },
+    {
+      "name": "tsk001-404-desktop",
+      "route": "/this-route-does-not-exist",
+      "viewport": "1440x1000",
+      "status": 404,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Page Not Found - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk001-403-desktop",
+      "route": "/forbidden",
+      "viewport": "1440x1000",
+      "status": 403,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Access Denied - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk001-403-mobile-rtl",
+      "route": "/forbidden",
+      "viewport": "390x844",
+      "status": 403,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "Access Denied - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk001-request-id-header",
+      "value": "10304624-5e00-4a66-8474-fb14ba341271"
+    },
+    {
+      "name": "ltr-desktop-dashboard",
+      "route": "/dashboard",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Dashboard - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-settings",
+      "route": "/admin/settings",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "System Settings - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-branches",
+      "route": "/admin/branches",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Branch Management - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-stores",
+      "route": "/admin/stores",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Store & Inventory Mapping Masters - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-cash-drawers",
+      "route": "/admin/cash-drawers",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Cash Drawer Masters - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-authorization-baseline",
+      "route": "/admin/authorization-baseline",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Authorization Baseline - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-audit",
+      "route": "/admin/audit",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Audit Logs - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-system-health",
+      "route": "/admin/system/health",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "System Health - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-ui-showcase",
+      "route": "/admin/system/ui-showcase",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "UI Pattern Showcase - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "ltr-desktop-pos",
+      "route": "/pos",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "POS - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-dashboard",
+      "route": "/dashboard",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "لوحة التحكم - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-settings",
+      "route": "/admin/settings",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "System Settings - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-branches",
+      "route": "/admin/branches",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Branch Management - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-stores",
+      "route": "/admin/stores",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Store & Inventory Mapping Masters - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-cash-drawers",
+      "route": "/admin/cash-drawers",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Cash Drawer Masters - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-authorization-baseline",
+      "route": "/admin/authorization-baseline",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Authorization Baseline - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-audit",
+      "route": "/admin/audit",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Audit Logs - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-system-health",
+      "route": "/admin/system/health",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "System Health - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-ui-showcase",
+      "route": "/admin/system/ui-showcase",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "UI Pattern Showcase - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-desktop-pos",
+      "route": "/pos",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "نقطة البيع - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-dashboard",
+      "route": "/dashboard",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "لوحة التحكم - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-settings",
+      "route": "/admin/settings",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "System Settings - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-branches",
+      "route": "/admin/branches",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "Branch Management - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-stores",
+      "route": "/admin/stores",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "Store & Inventory Mapping Masters - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-cash-drawers",
+      "route": "/admin/cash-drawers",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "Cash Drawer Masters - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-authorization-baseline",
+      "route": "/admin/authorization-baseline",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "Authorization Baseline - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-audit",
+      "route": "/admin/audit",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "Audit Logs - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-system-health",
+      "route": "/admin/system/health",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "System Health - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-ui-showcase",
+      "route": "/admin/system/ui-showcase",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "UI Pattern Showcase - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-mobile-pos",
+      "route": "/pos",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "نقطة البيع - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-tablet-branches",
+      "route": "/admin/branches",
+      "viewport": "834x1112",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 834,
+      "clientWidth": 834,
+      "title": "Branch Management - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "rtl-tablet-audit",
+      "route": "/admin/audit",
+      "viewport": "834x1112",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 834,
+      "clientWidth": 834,
+      "title": "Audit Logs - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk003-pwa-shell",
+      "manifestStatus": 200,
+      "serviceWorkerStatus": 200,
+      "serviceWorkerRegistered": "http://127.0.0.1:8093/"
+    },
+    {
+      "name": "tsk009-audit-detail-modal",
+      "opened": false,
+      "rendersRedactionMarkerWhenPresent": false
+    },
+    {
+      "name": "tsk004-ui-showcase-mobile",
+      "route": "/admin/system/ui-showcase",
+      "viewport": "390x844",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "UI Pattern Showcase - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk008-cashier-pos",
+      "route": "/pos",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "POS - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk008-cashier-denied-settings",
+      "route": "/admin/settings",
+      "viewport": "1440x1000",
+      "status": 403,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Access Denied - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk008-cashier-denied-audit",
+      "route": "/admin/audit",
+      "viewport": "1440x1000",
+      "status": 403,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Access Denied - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk008-cashier-denials",
+      "posStatus": 200,
+      "settingsStatus": 403,
+      "auditStatus": 403
+    },
+    {
+      "name": "tsk006-manager-branches-rtl",
+      "route": "/admin/branches",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Branch Management - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk006-manager-denied-drawers",
+      "route": "/admin/cash-drawers",
+      "viewport": "1440x1000",
+      "status": 403,
+      "lang": "ar",
+      "dir": "rtl",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Access Denied - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk009-reviewer-audit",
+      "route": "/admin/audit",
+      "viewport": "1440x1000",
+      "status": 200,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Audit Logs - TOY & JOY",
+      "horizontalOverflow": false
+    },
+    {
+      "name": "tsk009-reviewer-denied-branches",
+      "route": "/admin/branches",
+      "viewport": "1440x1000",
+      "status": 403,
+      "lang": "en",
+      "dir": "ltr",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "title": "Access Denied - TOY & JOY",
+      "horizontalOverflow": false
+    }
+  ],
+  "consoleErrors": [
+    {
+      "url": "http://127.0.0.1:8093/this-route-does-not-exist",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/forbidden",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/forbidden",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/forbidden",
+      "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/dashboard",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/dashboard",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/admin/settings",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/admin/audit",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/dashboard",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/dashboard",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/admin/cash-drawers",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    },
+    {
+      "url": "http://127.0.0.1:8093/admin/branches",
+      "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    }
+  ],
+  "failedRequests": [
+    {
+      "url": "http://127.0.0.1:8093/this-route-does-not-exist",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:8093/forbidden",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/forbidden",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/login",
+      "status": 500
+    },
+    {
+      "url": "http://127.0.0.1:8093/dashboard",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/dashboard",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/admin/settings",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/admin/audit",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/dashboard",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/dashboard",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/admin/cash-drawers",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8093/admin/branches",
+      "status": 403
+    }
+  ],
+  "finishedAt": "2026-08-03T22:18:01.706Z",
+  "summary": {
+    "screens": 47,
+    "horizontalOverflow": [],
+    "consoleErrorCount": 12,
+    "failedRequestCount": 12
+  }
+}

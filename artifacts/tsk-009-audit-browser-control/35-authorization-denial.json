@@ -1,0 +1,101 @@
+{
+  "result": "[object Object]",
+  "responses": [
+    {
+      "url": "http://127.0.0.1:8092/login",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/app-DdVY6Xc7.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/app-CfV73nN-.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/passkeys-ZWACIUjA.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/flux/flux.js?id=f705ecf0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/livewire-6bf7831b/livewire.js?id=283899a5",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/login",
+      "status": 302
+    },
+    {
+      "url": "http://127.0.0.1:8092/dashboard",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/app-DdVY6Xc7.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/app-CfV73nN-.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/admin/stores",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/app-DdVY6Xc7.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/flux/flux.js?id=f705ecf0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/app-CfV73nN-.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/livewire-6bf7831b/livewire.js?id=283899a5",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/livewire-6bf7831b/update",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/app-DdVY6Xc7.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8092/build/assets/app-CfV73nN-.js",
+      "status": 200
+    }
+  ]
+}

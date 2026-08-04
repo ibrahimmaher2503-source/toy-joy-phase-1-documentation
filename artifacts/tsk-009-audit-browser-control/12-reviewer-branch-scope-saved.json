@@ -1,0 +1,15 @@
+{
+  "before": {
+    "role": "true",
+    "cairo": "false"
+  },
+  "afterClick": {
+    "role": "true",
+    "cairo": "true"
+  },
+  "error": true,
+  "modalOpen": 1,
+  "livewire": [],
+  "console": [],
+  "failed": []
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "username": "demo-admin",
+    "allowedPath": "/admin/authorization-baseline",
+    "deniedPath": "/forbidden",
+    "allowedStatus": 200,
+    "deniedStatus": 403,
+    "screenshot": "super-admin-authorization.png",
+    "hiddenText": null
+  },
+  {
+    "username": "demo-branch-manager",
+    "allowedPath": "/admin/branches",
+    "deniedPath": "/admin/settings",
+    "allowedStatus": 200,
+    "deniedStatus": 403,
+    "screenshot": "branch-manager-branches.png",
+    "hiddenText": "Add Branch"
+  },
+  {
+    "username": "demo-cashier",
+    "allowedPath": "/pos",
+    "deniedPath": "/admin/stores",
+    "allowedStatus": 200,
+    "deniedStatus": 403,
+    "screenshot": "cashier-pos.png",
+    "hiddenText": null
+  },
+  {
+    "username": "demo-reviewer",
+    "allowedPath": "/dashboard",
+    "deniedPath": "/admin/branches",
+    "allowedStatus": 200,
+    "deniedStatus": 403,
+    "screenshot": "reviewer-dashboard.png",
+    "hiddenText": null
+  },
+  {
+    "username": "demo-no-access",
+    "allowedPath": "/",
+    "deniedPath": "/dashboard",
+    "allowedStatus": 200,
+    "deniedStatus": 403,
+    "screenshot": "no-access-home.png",
+    "hiddenText": null
+  }
+]

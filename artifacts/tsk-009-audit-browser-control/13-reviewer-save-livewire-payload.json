@@ -1,0 +1,10 @@
+[
+  {
+    "url": "http://127.0.0.1:8092/livewire-6bf7831b/update",
+    "body": "{\"_token\":\"c8ynjt6pD6bqd6NPaLkOmJ7212TDaIw7kTGmRaWT\",\"components\":[{\"snapshot\":\"{\\\"data\\\":{\\\"search\\\":\\\"\\\",\\\"editingUserId\\\":null,\\\"roleIds\\\":[[],{\\\"s\\\":\\\"arr\\\"}],\\\"branchIds\\\":[[],{\\\"s\\\":\\\"arr\\\"}],\\\"storeIds\\\":[[],{\\\"s\\\":\\\"arr\\\"}],\\\"paginators\\\":[{\\\"page\\\":1},{\\\"s\\\":\\\"arr\\\"}]},\\\"memo\\\":{\\\"id\\\":\\\"LRBVp2fuqA8BJ4frZm55\\\",\\\"name\\\":\\\"platform::admin.authorization-baseline\\\",\\\"path\\\":\\\"admin\\\\/authorization-baseline\\\",\\\"method\\\":\\\"GET\\\",\\\"release\\\":\\\"a-a-a\\\",\\\"children\\\":[],\\\"scripts\\\":[],\\\"assets\\\":[],\\\"errors\\\":[],\\\"locale\\\":\\\"en\\\",\\\"islands\\\":[]},\\\"checksum\\\":\\\"f1d0d5f0e1d19651d571a05d137d60de7de706fd3e083b0c41b0c2ef828ac937\\\"}\",\"updates\":{},\"calls\":[{\"method\":\"editAuthorization\",\"params\":[4],\"metadata\":{}}]}]}"
+  },
+  {
+    "url": "http://127.0.0.1:8092/livewire-6bf7831b/update",
+    "body": "{\"_token\":\"c8ynjt6pD6bqd6NPaLkOmJ7212TDaIw7kTGmRaWT\",\"components\":[{\"snapshot\":\"{\\\"data\\\":{\\\"search\\\":\\\"\\\",\\\"editingUserId\\\":4,\\\"roleIds\\\":[[9],{\\\"s\\\":\\\"arr\\\"}],\\\"branchIds\\\":[[],{\\\"s\\\":\\\"arr\\\"}],\\\"storeIds\\\":[[],{\\\"s\\\":\\\"arr\\\"}],\\\"paginators\\\":[{\\\"page\\\":1},{\\\"s\\\":\\\"arr\\\"}]},\\\"memo\\\":{\\\"id\\\":\\\"LRBVp2fuqA8BJ4frZm55\\\",\\\"name\\\":\\\"platform::admin.authorization-baseline\\\",\\\"path\\\":\\\"admin\\\\/authorization-baseline\\\",\\\"method\\\":\\\"GET\\\",\\\"release\\\":\\\"a-a-a\\\",\\\"children\\\":[],\\\"scripts\\\":[],\\\"assets\\\":[],\\\"errors\\\":[],\\\"locale\\\":\\\"en\\\",\\\"islands\\\":[]},\\\"checksum\\\":\\\"e9106318ae29eaf4dbca019b27e6df63dc9b0a8b816c328595e46698a30487ec\\\"}\",\"updates\":{\"editingUserId\":true,\"branchIds\":[\"1\"]},\"calls\":[{\"method\":\"saveAuthorization\",\"params\":[],\"metadata\":{}}]}]}"
+  }
+]
