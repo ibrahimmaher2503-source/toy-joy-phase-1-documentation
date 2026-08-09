@@ -1,0 +1,67 @@
+- generic [ref=e2]:
+  - button "Toggle theme" [ref=e20] [cursor=pointer]
+  - generic [ref=e23]:
+    - heading "Testing Configuration" [level=1] [ref=e24]
+    - heading "Testing Types *" [level=2] [ref=e25]
+    - paragraph [ref=e26]: Select your testing types.
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: Mode
+        - generic [ref=e30]:
+          - generic [ref=e32]:
+            - button "Backend" [ref=e33] [cursor=pointer]
+            - button "Frontend" [ref=e34] [cursor=pointer]
+          - paragraph [ref=e35]: Choose whether to test your backend service or frontend workflows.
+      - separator [ref=e36]
+      - generic [ref=e37]:
+        - generic [ref=e38]: Scope
+        - generic [ref=e39]:
+          - generic [ref=e41]:
+            - button "Codebase" [ref=e42] [cursor=pointer]
+            - button "Code diff" [ref=e43] [cursor=pointer]
+          - paragraph [ref=e44]: Select whether to test against the entire codebase or just recent changes (uncommitted git changes).
+    - generic [ref=e85]:
+      - heading "Test Account Info (Optional)" [level=2] [ref=e86]
+      - paragraph [ref=e87]: Provide the login credentials for a test account that can be used to access and test your application.
+      - generic [ref=e88]:
+        - generic [ref=e89]:
+          - generic [ref=e90]: Test Account Username
+          - generic [ref=e91]:
+            - textbox "Test Account Username" [ref=e92]
+            - paragraph [ref=e93]: Provide a test account username, e.g., test@example.com.
+        - generic [ref=e94]:
+          - generic [ref=e95]: Test Account Password
+          - generic [ref=e96]:
+            - textbox "Test Account Password" [ref=e97]
+            - paragraph [ref=e98]: Enter the corresponding password for the test account, e.g., 123456abc.
+    - generic [ref=e54]:
+      - heading "Local Server Port *" [level=2] [ref=e55]
+      - paragraph [ref=e56]: Port where your local server is running e.g. 3000 in localhost:3000. If there is a specific path that you want to test and not accessible from the root, enter it in the "Path" section. e.g. dashboard for localhost:3000/dashboard
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]: Port
+          - generic [ref=e62]:
+            - generic [ref=e63]: "http://localhost:"
+            - textbox "http://localhost:" [ref=e64]
+        - generic [ref=e65]:
+          - generic [ref=e66]: Path
+          - generic [ref=e69]:
+            - generic [ref=e70]: /
+            - textbox / [ref=e71]
+        - button [ref=e100] [cursor=pointer]:
+          - strong [ref=e101]: Dev servers may crash under load (frontend tests limited to 15).
+          - strong [ref=e102]: Production servers (frontend tests will be limited to 30).
+    - generic [ref=e72]:
+      - generic [ref=e73]: Product Specification Doc *
+      - paragraph [ref=e74]: Upload a document that explains your desired product’s features, purpose, and how it should work.
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77] [cursor=pointer]:
+            - img "folder" [ref=e78]
+            - text: Select your product requirements document (PDF, Markdown, or other formats)
+          - button "Choose File" [ref=e79] [cursor=pointer]
+        - paragraph [ref=e80]: Even a draft works — we’ll generate a comprehensive, standardized PRD for you later.
+        - heading "Uploaded files" [level=3] [ref=e81]
+    - generic [ref=e82]:
+      - button "Reset" [ref=e83] [cursor=pointer]
+      - button "Continue" [ref=e84] [cursor=pointer]

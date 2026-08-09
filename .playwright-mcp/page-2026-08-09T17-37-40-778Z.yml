@@ -1,0 +1,81 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e2]:
+    - link "TOY & JOY" [ref=f4e4] [cursor=pointer]:
+      - /url: http://localhost:8000/dashboard
+    - navigation "Workspace" [ref=f4e12]:
+      - generic [ref=f4e13]:
+        - generic [ref=f4e14]: Workspace
+        - generic [ref=f4e16]:
+          - link "Dashboard" [ref=f4e18] [cursor=pointer]:
+            - /url: http://localhost:8000/dashboard
+          - link "Operational alerts" [ref=f4e24] [cursor=pointer]:
+            - /url: http://localhost:8000/alerts-readiness
+          - link "Reports" [ref=f4e30] [cursor=pointer]:
+            - /url: http://localhost:8000/reports-readiness
+          - link "PDF / Excel export center" [ref=f4e36] [cursor=pointer]:
+            - /url: http://localhost:8000/exports-audit-readiness
+      - button "Sales" [ref=f4e42]
+      - button "Customers" [ref=f4e51]
+      - button "Catalog" [ref=f4e60]
+      - button "Suppliers" [ref=f4e69]
+      - button "Purchasing" [ref=f4e78]
+      - button "Pricing" [ref=f4e87]
+      - button "Inventory" [ref=f4e96]
+      - button "Parties" [ref=f4e105]
+      - button "Rental Assets" [ref=f4e114]
+      - button "Reports" [ref=f4e123]
+      - button "Administration" [ref=f4e132]
+      - button "System & Control" [ref=f4e142]
+    - generic [ref=f4e150]: Online
+    - button "LA Local Demo Administrator" [ref=f4e155]:
+      - generic [ref=f4e156]: LA
+      - generic [ref=f4e159]: Local Demo Administrator
+  - generic [ref=f4e164]:
+    - generic "Page tools" [ref=f4e165]:
+      - button "Page Guide" [ref=f4e166]:
+        - generic [ref=f4e167]: "?"
+      - button "Appearance Customizer" [ref=f4e169]:
+        - generic [ref=f4e170]: ✦
+    - main [ref=f4e173]:
+      - generic [ref=f4e174]:
+        - generic [ref=f4e175]: Platform foundation
+        - generic [ref=f4e177]:
+          - generic [ref=f4e178]:
+            - heading "Operations workspace" [level=1] [ref=f4e179]
+            - generic [ref=f4e180]: DM 1.1 in progress
+          - generic [ref=f4e181]: The shared application foundation is ready for authentication, operational modules, and role-scoped workflows.
+      - generic [ref=f4e182]:
+        - generic [ref=f4e183]:
+          - generic [ref=f4e184]: First launch setup
+          - generic [ref=f4e185]: Complete initial setup
+          - paragraph [ref=f4e186]: 3 / 5 required steps completed. Enter owner-provided data before opening operations.
+        - link "Open setup dashboard" [ref=f4e187] [cursor=pointer]:
+          - /url: http://localhost:8000/initial-setup
+      - region "Foundation status" [ref=f4e188]:
+        - generic [ref=f4e189]:
+          - generic [ref=f4e190]: Foundation status
+          - paragraph [ref=f4e191]: Verified building blocks available in the current development environment.
+        - list [ref=f4e192]:
+          - listitem [ref=f4e193]:
+            - generic [ref=f4e194]:
+              - paragraph [ref=f4e195]: Application shell
+              - paragraph [ref=f4e196]: Responsive sidebar, mobile navigation, and shared page structure.
+            - generic [ref=f4e197]: Available
+          - listitem [ref=f4e198]:
+            - generic [ref=f4e199]:
+              - paragraph [ref=f4e200]: Authentication
+              - paragraph [ref=f4e201]: Sign in, registration, password reset, verification, passkeys, and account security.
+            - generic [ref=f4e202]: Available
+          - listitem [ref=f4e203]:
+            - generic [ref=f4e204]:
+              - paragraph [ref=f4e205]: Language direction
+              - paragraph [ref=f4e206]: Locale-aware document direction supports Arabic RTL and English LTR layouts.
+            - generic [ref=f4e207]: Configured
+      - generic [ref=f4e208]:
+        - generic [ref=f4e209]:
+          - generic [ref=f4e210]: Continue platform setup
+          - paragraph [ref=f4e211]: Account settings are available while roles, audit controls, and infrastructure decisions remain in the active milestone.
+        - link "Open account settings" [ref=f4e212] [cursor=pointer]:
+          - /url: http://localhost:8000/settings/profile
+    - generic:
+      - status

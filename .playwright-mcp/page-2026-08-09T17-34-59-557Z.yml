@@ -1,0 +1,55 @@
+- generic [ref=e1]:
+  - button "عربي" [ref=e4]
+  - generic [ref=e13]:
+    - link "TOY & JOY" [ref=e14] [cursor=pointer]:
+      - /url: http://localhost:8000
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e25]: Log in to your account
+        - generic [ref=e26]: Enter your username and password below to log in
+      - generic [ref=e28]:
+        - button "Sign in with a passkey" [ref=e30]
+        - generic [ref=e34]: Or continue with email
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: Username
+          - textbox "Username" [active] [ref=e43]:
+            - /placeholder: ibrahim
+        - generic [ref=e44]:
+          - generic [ref=e45]:
+            - generic [ref=e46]: Password
+            - generic [ref=e47]:
+              - textbox "Password" [ref=e48]
+              - button "Toggle password visibility" [ref=e50]
+          - link "Forgot your password?" [ref=e54] [cursor=pointer]:
+            - /url: http://localhost:8000/forgot-password
+        - generic [ref=e55]:
+          - checkbox "Remember me" [ref=e56]
+          - generic [ref=e58]: Remember me
+        - button "Log in" [ref=e60]
+      - generic [ref=e66]:
+        - text: Don't have an account?
+        - link "Sign up" [ref=e67] [cursor=pointer]:
+          - /url: http://localhost:8000/register
+  - generic:
+    - status
+  - generic [ref=e70]:
+    - generic [ref=e71] [cursor=pointer]
+    - generic [ref=e72]:
+      - generic [ref=e73] [cursor=pointer]: Request
+      - generic [ref=e74] [cursor=pointer]: Timeline
+      - generic [ref=e75] [cursor=pointer]:
+        - generic: Views
+        - generic [ref=e76]: "9"
+      - generic [ref=e77] [cursor=pointer]:
+        - generic: Queries
+        - generic [ref=e78]: "3"
+    - generic [ref=e79]:
+      - generic [ref=e80] [cursor=pointer]
+      - generic [ref=e81] [cursor=pointer]
+      - generic [ref=e82] [cursor=pointer]
+      - generic [ref=e84] [cursor=pointer]
+      - generic [ref=e85]: GET /login
+      - generic [ref=e88] [cursor=pointer]: 107ms
+      - generic [ref=e90] [cursor=pointer]: 4MB
+      - generic [ref=e92] [cursor=pointer]: 13.x

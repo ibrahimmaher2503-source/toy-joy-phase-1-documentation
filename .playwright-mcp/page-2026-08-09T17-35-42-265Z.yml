@@ -1,0 +1,59 @@
+- generic [ref=f1e1]:
+  - button "عربي" [ref=f1e4]
+  - generic [ref=f1e13]:
+    - link "TOY & JOY" [ref=f1e14] [cursor=pointer]:
+      - /url: http://localhost:8000
+    - generic [ref=f1e23]:
+      - generic [ref=f1e24]:
+        - generic [ref=f1e25]: Log in to your account
+        - generic [ref=f1e26]: Enter your username and password below to log in
+      - generic [ref=f1e28]:
+        - button "Sign in with a passkey" [ref=f1e30]
+        - generic [ref=f1e34]: Or continue with email
+      - generic [ref=f1e39]:
+        - generic [ref=f1e40]:
+          - generic [ref=f1e41]: Username
+          - textbox "Username" [active] [invalid] [ref=f1e43]:
+            - /placeholder: ibrahim
+            - text: demo-admin
+          - alert [ref=f1e44]: These credentials do not match our records.
+        - generic [ref=f1e47]:
+          - generic [ref=f1e48]:
+            - generic [ref=f1e49]: Password
+            - generic [ref=f1e50]:
+              - textbox "Password" [ref=f1e51]
+              - button "Toggle password visibility" [ref=f1e53]
+          - link "Forgot your password?" [ref=f1e57] [cursor=pointer]:
+            - /url: http://localhost:8000/forgot-password
+        - generic [ref=f1e58]:
+          - checkbox "Remember me" [ref=f1e59]
+          - generic [ref=f1e61]: Remember me
+        - button "Log in" [ref=f1e63]
+      - generic [ref=f1e69]:
+        - text: Don't have an account?
+        - link "Sign up" [ref=f1e70] [cursor=pointer]:
+          - /url: http://localhost:8000/register
+  - generic:
+    - status
+  - generic [ref=f1e73]:
+    - generic [ref=f1e74] [cursor=pointer]
+    - generic [ref=f1e75]:
+      - generic [ref=f1e76] [cursor=pointer]: Request
+      - generic [ref=f1e77] [cursor=pointer]: Timeline
+      - generic [ref=f1e78] [cursor=pointer]:
+        - generic: Views
+        - generic [ref=f1e79]: "9"
+      - generic [ref=f1e80] [cursor=pointer]:
+        - generic: Queries
+        - generic [ref=f1e81]: "2"
+    - generic [ref=f1e82]:
+      - generic [ref=f1e83] [cursor=pointer]
+      - generic [ref=f1e84] [cursor=pointer]
+      - generic [ref=f1e85] [cursor=pointer]
+      - generic [ref=f1e87] [cursor=pointer]
+      - generic [ref=f1e89] [cursor=pointer]:
+        - generic [ref=f1e90]: "2"
+        - generic [ref=f1e91]: GET /login
+      - generic [ref=f1e92] [cursor=pointer]: 665ms
+      - generic [ref=f1e94] [cursor=pointer]: 4MB
+      - generic [ref=f1e96] [cursor=pointer]: 13.x

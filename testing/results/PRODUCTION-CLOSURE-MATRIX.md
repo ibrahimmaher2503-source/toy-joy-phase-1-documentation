@@ -941,3 +941,48 @@ Approval required: choose one option in each row above, or explicitly confirm th
 
 Revised TSK-013 technical status: **TECHNICALLY_READY**.
 Release status: **RELEASE_BLOCKED_GLOBAL_CONFIG / RELEASE_BLOCKED_UAT** pending named production supplier owner/reviewer, production supplier data, delegated scope assignments, and human acceptance. Purchase history remains `DOWNSTREAM_DEPENDENCY: TSK-015`.
+
+
+---
+
+# TSK-025 Production Closure
+
+Date: 2026-08-09
+Scope: TSK-025 only, Shift Opening, Cash Movements, Blind Closing, and Variance Review.
+
+Requirement: CSH-01–CSH-04, POS-02–POS-03, NFR-01–NFR-06.
+Milestone: DM 3.3.
+Policy: `docs/32` (approved detailed specification), adopted arithmetic from `docs/48` under DEC-066.
+Workflow: open shift with float -> linked sales and cash movements -> server-derived expected totals -> blind actual submission -> variance by method -> manager recount/approval -> immutable close with document number -> audit.
+
+Traceability: `TASKS.md` TSK-025 -> CSH-01–CSH-04 -> `ShiftState`, `OpenShiftAction`, `RecordCashMovementAction`, `ShiftExpectedTotalsService`, `SubmitBlindShiftCloseAction`, `ReviewShiftVarianceAction`, routes `/pos/shift` and `/pos/shift-variance` -> `ShiftCashLifecycleTest`, `ShiftHttpRouteTest`, `CashShiftOfflineBoundaryTest`, `ShiftOpenConcurrencyTest`, `testing/e2e/tsk025-shift-cash.spec.js`.
+
+## Functional
+
+PASS (local implementation)
+
+The previous `/pos/shift-readiness` boundary was removed. Implemented and verified locally: exclusive shift opening per drawer and per cashier, opening float validation, append-only signed cash movements, expected totals derived only from immutable linked activity, blind actual submission that never returns an expectation, variance by method with a documented sign convention, controlled recount, manager approval with separation of duties, immutable closure with `shift_close` numbering, and full audit. A sale racing a close is rejected under a shift row lock.
+
+## Automated Tests
+
+PASS (targeted/local scope)
+
+37 backend tests plus 6 browser tests. Full suite 423/420 with only the 2 pre-existing authorization-drift failures. PHPStan 0 errors with no suppression; Pint clean; migration rollback clean.
+
+## Blocked / Not Closed
+
+- **Concurrency and MariaDB parity — BLOCKED_BY_ENVIRONMENT.** `ShiftOpenConcurrencyTest` and the `shift_open` race worker exist but no MySQL/MariaDB server is reachable here, so the proof skips rather than falsely passing. Drawer-uniqueness under genuine overlap is therefore **unproven in this environment**.
+- **Thermal and A4 close prints (docs/32 §15)** — not implemented; BLK-008 templates.
+- **POSF-02 cash denomination** and the **variance tolerance threshold** remain unset owner values. With no tolerance configured, only a zero variance auto-settles; everything else routes to manager review.
+- **Accessibility (axe) and visual regression** — not run for the new screens.
+- Human UAT, device acceptance, and production deployment evidence remain external gates.
+
+## Defects Fixed During Closure
+
+1. `CanonicalAuthorizationSeeder` granted the Cashier role **no** `shifts_cash_movements` permissions despite `docs/04` (canonical, BLK-007 closed) granting view/create/edit/print — a cashier could not open a shift at all.
+2. Migration rollback failed on SQLite because a unique index still referenced a dropped column.
+3. Three actions crashed after `pos_shifts.status` was cast to the `ShiftState` enum.
+
+## Release Status
+
+RELEASE_BLOCKED_CONFIG — POSF-02, variance tolerance, and BLK-008 print templates.
