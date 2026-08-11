@@ -58,7 +58,7 @@ This materially changes what is implementable. `.ai/BLOCKERS.md` predates `docs/
 | TSK-024 | Discounts, Tax, Payments, Evidence | ~~READINESS_ONLY~~ → **IMPLEMENTED (local)** | **DONE — DEC-066** |
 | TSK-025 | Shift Open, Cash, Blind Close, Variance | ~~FOUNDATION_ONLY~~ → **IMPLEMENTED (local)** | **DONE — DEC-066** |
 | TSK-026 | Offline POS, Sync, Conflict Review | **READINESS_ONLY** | **NO — BLK-004 open** |
-| TSK-027 | Customer Profiles + Shared Loyalty | **PARTIAL (settings only)** | **YES — customer master** |
+| TSK-027 | Customer Profiles + Shared Loyalty | **ACTUALLY_IMPLEMENTED (Local/Dev)** | **YES — customer master and retail loyalty; Party/wallet/gift/return consumers remain downstream** |
 | TSK-028 | Separated Product/Party Wallets | **FOUNDATION_ONLY** | **NO — needs `customers`** |
 | TSK-029 | Gift Cards + Gift Receipts | **READINESS_ONLY** | **NO — needs `customers`** |
 | TSK-030 | Returns and Exchanges | **READINESS_ONLY** | Needs `customers`; TSK-024 payments now exist |
@@ -79,9 +79,18 @@ Dependency analysis shows almost every open task funnels through **two missing t
 1. **`sale_payments`** (TSK-024) → blocks TSK-025 (expected cash per method), TSK-030 (refund reversal), TSK-032/036 (party payments), TSK-029 (gift card as tender).
 2. **`customers`** (TSK-027) → blocks TSK-028 (per-holder wallet balance), TSK-029 (gift card holder), TSK-030 (return-to-customer), TSK-031–036 (party booking customer), TSK-037 (quotation recipient).
 
-`sale_payments` was **owner-blocked**; DEC-066 unblocked it and it is now **implemented**. `customers` remains the outstanding keystone.
+`sale_payments` was **owner-blocked**; DEC-066 unblocked it and it is now **implemented**. TSK-027 now supplies the customer keystone for downstream work; TSK-028/029/030 remain separate tasks and were not started here.
 
 ---
+
+# Current Implementation Record — TSK-027
+
+- **Current classification:** `ACTUALLY_IMPLEMENTED` for the Local/Dev customer and retail-loyalty contract; not a production or UAT sign-off.
+- **Implemented:** `customers`, `customer_scopes`, bilingual identity/contact data, unique normalized phone, append-only consent snapshots, purpose-scoped child profiles, controlled safe merge with blocked unsafe history, sale `customer_id` linkage, scoped customer search/profile/history, POS selection/registration, immutable source-linked loyalty ledger, FIFO earn/redeem/expiry, canonical approval-backed adjustment approval/rejection, idempotency, row locking/deadlock retry, audit before/after/source/scope metadata, and direct HTTP/IDOR/RBAC enforcement.
+- **Readiness-only replaced:** customer/loyalty readiness navigation now opens the real customer master; the old readiness route redirects there. Policy settings remain append-only and fail closed when required values are unset or invalid.
+- **Evidence:** SQLite feature 10/10 (81 assertions), MariaDB feature 10/10 (81 assertions), MariaDB concurrency 3/3 (27 assertions), readiness authorization regression 3/3 (71 assertions), and TSK-027 Playwright 7 passed across Chromium/Firefox/WebKit with two deliberate non-Chromium viewport/visual skips. The real business-chain test now posts through `RetailSaleAction` before earn, balance, redeem, and audit assertions; the canonical adjustment rejection path is also covered.
+- **Partial:** unified history currently includes implemented retail sales and customer/loyalty sources with branch/store filtering; Party history/payment sources do not exist and remain downstream. Loyalty redemption records a source-linked ledger debit and is intentionally not a TSK-028 wallet or TSK-030 return settlement. Automatic scheduler-driven expiry and human visual/UAT evidence remain open.
+- **Owner decisions:** exact legal consent wording/retention and final production loyalty rates/expiry/rounding/approval values remain configurable/owner-controlled under DEC-067; production-safe role grants remain an owner/release decision.
 
 # P0 — MONEY / STOCK / POS
 
@@ -188,7 +197,7 @@ Dependency analysis shows almost every open task funnels through **two missing t
 
 # P1 — CUSTOMER / WALLET / RETURNS
 
-## TSK-027 — Customer Profiles and Shared Loyalty
+## TSK-027 — Customer Profiles and Shared Loyalty (historical pre-implementation audit)
 
 - **Required capability:** Customer master, consent, child/profile/privacy rules, loyalty ledger, earn/redeem/expiry, adjustment/approval, history.
 - **Actual implementation:** **PARTIAL — settings scaffold only.** `customer_policy_setting_versions` table + `CustomerPolicySettingRegistry` + `SaveCustomerPolicySettingAction` (DEC-064) provide an append-only, versioned, audited store for policy keys (phone/duplicate review, consent/purpose/retention, children scope, history visibility, loyalty rules, expiry, rounding, approval). Route `customers/loyalty-readiness` + `admin/settings/customer-loyalty`.
@@ -325,9 +334,9 @@ Option A's "block" is operationally hostile at a till — a cashier who applies 
 6. `RetailSaleAction::finalize()` — stop writing `paid_total = subtotal`; require settled payments before `approved`.
 7. Update `RetailSaleIntegrityTest`, `RetailSuspendedAndBarcodeTest`, `RetailSaleConcurrencyTest`, `Feature/E2E/*`, and `Feature/Contracts/InventoryPosContractTest`, which all currently finalize sales with no payment.
 
-## OD-2 — Authorize loyalty/wallet ledgers to consume DEC-064 settings (blocks TSK-027 loyalty, TSK-028)
+## OD-2 — Historical settings-consumption decision (resolved for TSK-027; TSK-028 remains separate)
 
-**DECISION:** DEC-064 states that *no calculation, ledger, or transaction consumes* `customer_policy_setting_versions` values. Loyalty earn/redeem and wallet mutation cannot be implemented under that restriction, even though BLK-014 is *Mitigated*.
+**DECISION:** The owner-authorized Local/Dev TSK-027 slice applies the recommended fail-closed settings-consumption pattern for customer and retail loyalty only. Required policy values are read from `customer_policy_setting_versions`; unset or invalid values stop posting and no defaults are invented. Product Wallet/Party Wallet mutation remains TSK-028 and is not enabled by this decision.
 
 **OPTIONS:**
 - **Option A** — Authorize consumption for Local/Dev only, with the ledger refusing to operate when a required value is unset (no default rate, no silent zero).
@@ -337,9 +346,9 @@ Option A's "block" is operationally hostile at a till — a cashier who applies 
 **RECOMMENDED OPTION:** **Option A.**
 It follows DEC-065's established pattern, keeps every number owner-controlled, and makes "unset" a hard failure rather than an invented default. Option C would inject fabricated financial rates, which rule 5 forbids.
 
-**IMPACT:** Unblocks the loyalty ledger and per-holder wallet balances. **TSK-027's customer master, consent, privacy, and history do not depend on this decision and can proceed regardless.**
+**IMPACT:** Unblocks the TSK-027 retail loyalty ledger for Local/Dev. It does not authorize wallet mutation, Party loyalty, Production values, or release behavior.
 
-**CODE CHANGE AFTER APPROVAL:** `LoyaltyLedgerService` and wallet mutation actions read rates via `CustomerPolicySettingRegistry`, throwing a domain exception when a required key is unset.
+**CODE CHANGE:** TSK-027 customer loyalty actions read rates via `CustomerPolicy`, throwing a domain exception when a required key is unset or invalid. TSK-028 has no mutation actions and remains downstream.
 
 ## OD-3 — Offline POS operating policy (blocks TSK-026) — **no recommendation offered**
 
@@ -401,7 +410,7 @@ No category above is claimed as passing where it was not executed.
 | TSK-024 | **FULLY_IMPLEMENTED (local)** | **FULLY_TESTED (local scope)** | RELEASE_BLOCKED_CONFIG (BLK-008 production values) |
 | TSK-025 | **FULLY_IMPLEMENTED (local)** | **FULLY_TESTED (local scope)** | RELEASE_BLOCKED_CONFIG (POSF-02, tolerance, print templates) |
 | TSK-026 | READINESS_ONLY | PARTIALLY_TESTED | **BLOCKED_BY_OWNER (OD-3)** |
-| TSK-027 | PARTIALLY_IMPLEMENTED | PARTIALLY_TESTED | BLOCKED_BY_OWNER (loyalty only, OD-2) |
+| TSK-027 | **ACTUALLY_IMPLEMENTED (Local/Dev)** | **FULLY_TESTED for the accepted Local/Dev customer + retail-loyalty contract** | **RELEASE_BLOCKED_OWNER/CONFIG** (legal/production values, role grants, UAT, infrastructure) |
 | TSK-028 | READINESS_ONLY (foundation) | PARTIALLY_TESTED | BLOCKED_BY_DEPENDENCY |
 | TSK-029, 030 | READINESS_ONLY | PARTIALLY_TESTED | BLOCKED_BY_DEPENDENCY |
 | TSK-031–036 | READINESS_ONLY (no module) | PARTIALLY_TESTED | BLOCKED_BY_DEPENDENCY |
@@ -564,6 +573,14 @@ The readiness route and its tutorial guide were **deleted**, not kept alongside 
 The three-browser E2E run is intermittent: Laravel's login throttle uses the database cache, and eighteen sequential logins trip it, producing 25-second `waitForURL` timeouts on whichever test happens to hit the limit. Every individual assertion passed on every browser; a clean Chromium-only run is 6/6. `testing/e2e/README.md` already documents clearing the cache between runs. **This is a harness limitation, not a product defect** — but the suite should not be treated as reliably green until it either shares an authenticated storage state or raises the throttle for the E2E environment.
 
 ## Remaining owner decisions
+
+### Party parallel implementation override - 2026-08-10
+
+The historical gap rows for TSK-031, TSK-032, TSK-033, and TSK-036 are superseded for the owner-requested local/dev slice only. TSK-031, TSK-032/036, and TSK-033 are now FULL; TSK-033 includes its authoritative TSK-034/US-028 rental-asset integration. TSK-034 and TSK-035 were not changed.
+
+### US-027 asset integration closure - 2026-08-10
+
+The remaining TSK-034/US-028 boundary is now integrated. **TSK-033 / US-027 is FULL local/dev** for Party booking asset references, authoritative non-overlapping reservation, Party operating-order checkout/return/inspection, scoped source linkage, completion blocking, history, and audit. The historical rows above remain unchanged; this addendum is the current local/dev classification. No second asset reservation system was created.
 
 - **POSF-02 — cash rounding denomination.** Still unset by DEC-066. Unrelated to shift close but shares the drawer.
 - **Variance tolerance threshold.** Deliberately not invented: with no configured tolerance, **only a zero variance auto-settles**; every non-zero variance routes to manager review. If the owner wants a tolerance band, it becomes a configurable value under DEC-065.

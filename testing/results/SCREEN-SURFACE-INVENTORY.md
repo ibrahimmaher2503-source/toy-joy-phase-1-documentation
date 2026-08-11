@@ -7,7 +7,7 @@
 
 ## Executive summary
 
-The application contains real local/dev slices for Platform, Catalog, Suppliers, Purchasing, Pricing, Inventory, POS, and Shifts. It also contains several readiness-only boundaries for Customers, Loyalty, Gift Cards, Returns, Parties, Rental Assets, Quotations, Reports, Exports, Alerts, and Offline POS.
+The application contains real local/dev slices for Platform, Catalog, Suppliers, Purchasing, Pricing, Inventory, POS, Shifts, and the accepted TSK-027 Customer Master/Retail Loyalty contract. It also contains readiness-only boundaries for Gift Cards, Returns, Parties, Rental Assets, Quotations, Reports, Exports, Alerts, and Offline POS. Historical rows below are updated where TSK-027 replaced a readiness surface.
 
 The target navigation tree is broader than the current application. Several current labels reuse an operational page, a broad workspace, or a readiness page. Those mappings are recorded as incorrect rather than treated as completion.
 
@@ -108,12 +108,12 @@ The following tables use the requested columns. Page names grouped in one row ar
 
 | Group | Page | Route | Permission | PRD IDs | Current State | Problem | Action Required |
 |---|---|---|---|---|---|---|---|
-| Customers | Customers; Create Customer; Children; Child Details | Missing | customer view/create/edit | MD-06, CUS-01, US-003, UI-CUS-001/002 | `MISSING` | No customer or child domain | Implement master records, sensitive fields and consent |
-| Customers | Purchase History; Party History; Payment History; Return History; Gift Card History | `sales.index` only for transaction history | customer history plus source permissions | CUS-01/03, RET-01/03, UI-CUS-002 | `EXISTS_BUT_WRONG` | Sales page is reused instead of customer-linked history | Add customer-scoped projections and filters |
-| Customers | Loyalty Points; Loyalty Movements | `customers.loyalty-readiness` | loyalty view/adjust | CUS-03/04, US-023, UI-CUS-003 | `READINESS_ONLY` | Readiness/settings page is not a ledger | Implement append-only loyalty ledger and settings enforcement |
+| Customers | Customers; Create Customer; Children; Child Details | `customers`, `customers.create`, `customers/{customerId}` | customer view/create/edit/sensitive | MD-06, CUS-01, US-003, UI-CUS-001/002 | `ACTUALLY_IMPLEMENTED (Local/Dev)` | Real customer master, bilingual identity/contact, consent, purpose-scoped child profile, scope, and named mutations are present | Production/legal/UAT inputs remain open |
+| Customers | Purchase History; Party History; Payment History; Return History; Gift Card History | `customers/{customerId}`, `customers/{customerId}/loyalty` | customer history plus source permissions | CUS-01/03, RET-01/03, UI-CUS-002 | `PARTIAL — retail history implemented` | Approved retail sales and loyalty history are customer-linked and scope-filtered; Party/payment/return/gift sources remain downstream | Add downstream source consumers in their own tasks |
+| Customers | Loyalty Points; Loyalty Movements | `customers/{customerId}/loyalty` | loyalty view/adjust/approve/export | CUS-03/04, US-023, UI-CUS-003 | `ACTUALLY_IMPLEMENTED (Local/Dev)` | Immutable source-linked retail ledger, FIFO earn/redeem/expiry, approved/rejected adjustments, audit, and exports are present | Automatic scheduler expiry and final production values remain open |
 | Customers | Product Wallet; Product Wallet Movements | `wallets.product` | product wallet view/adjust/settle | CUS-02, UI-CUS-004 | `EXISTS_BUT_PARTIAL` | Separate ledger foundation exists, but no complete balance/mutation flow | Implement holder, balances, movements, policy and reconciliation |
 | Customers | Party Wallet; Party Wallet Movements | `wallets.party` | party wallet view/adjust/settle | CUS-02, UI-CUS-005 | `EXISTS_BUT_PARTIAL` | Separate foundation exists, but settlement is missing | Implement party-specific settlement and movements |
-| Customers | Consent & Privacy; Duplicate Customer Review / Merge | Missing | customer edit/merge | MD-06, SEC-016/017 | `MISSING` | No consent history, duplicate review or merge operation | Implement versioned privacy and reviewed merge workflow |
+| Customers | Consent & Privacy; Duplicate Customer Review / Merge | `customers/{customerId}` | customer sensitive/merge | MD-06, SEC-016/017 | `ACTUALLY_IMPLEMENTED (Local/Dev)` | Append-only consent/privacy history and controlled safe/unsafe merge rules are present | Legal wording, retention, and UAT remain open |
 
 ### Catalog
 
@@ -218,7 +218,7 @@ The following tables use the requested columns. Page names grouped in one row ar
 | Administration & Settings | Branches; Stores / Warehouses; Selling Store Mapping; Cash Drawers | admin branches/stores/drawers | branch/store/drawer permissions | MD-01, CSH-01 | `EXISTS_BUT_PARTIAL` | Platform foundation exists; complete scope and operational mapping remain | Finish assignments and audit |
 | Administration & Settings | Users; Roles; Permissions; Branch / Store Scopes | `admin.authorization-baseline` | users/roles/permissions view/edit | DEC-038, security baseline | `EXISTS_BUT_PARTIAL` | Combined baseline page, not separate responsibilities | Add distinct access-management surfaces and maker/checker controls |
 | Administration & Settings | Payment Methods; Tax Settings; Document Numbering; Document Templates; Printing Settings; Printers | `admin.settings`, drawer/settings routes | financial/admin settings permissions | POS-03 to POS-06, SEC-018 | `EXISTS_BUT_PARTIAL` | Settings are consolidated and some values are unset | Complete effective dating, validation and printer/template behavior |
-| Administration & Settings | Customer Policies; Loyalty Settings; Product Wallet Settings; Party Wallet Settings; Gift Card Settings; Return Policy; Return Reasons; Inventory Policies; Pricing Policies; Open Price Policies; Offline POS Settings | settings/readiness routes | resource-specific settings | CUS, RET, INV, PRC, POS, OFF policies | `EXISTS_BUT_PARTIAL` / `READINESS_ONLY` | Most policy destinations are absent or readiness-only | Add versioned policies and explicit `BLOCKED_BY_CONFIGURATION` behavior |
+| Administration & Settings | Customer Policies; Loyalty Settings; Product Wallet Settings; Party Wallet Settings; Gift Card Settings; Return Policy; Return Reasons; Inventory Policies; Pricing Policies; Open Price Policies; Offline POS Settings | `admin/settings/customer-loyalty` plus settings/readiness routes | resource-specific settings | CUS, RET, INV, PRC, POS, OFF policies | `EXISTS_AND_FUNCTIONAL` for TSK-027 customer/retail loyalty; `EXISTS_BUT_PARTIAL` / `READINESS_ONLY` elsewhere | TSK-027 policy versions are append-only and consumed fail-closed; wallet/gift/return/offline policy destinations remain incomplete | Complete only the remaining task-owned policy contracts |
 
 ### Control & System
 
@@ -236,7 +236,7 @@ The following tables use the requested columns. Page names grouped in one row ar
 
 1. `pricing.approvals` renders the same `pricing::index` page as `pricing.index`.
 2. Price Lists, Price Proposals, Price Versions, Price Change History, and Unpriced Products reuse the pricing workspace.
-3. Customer files and Loyalty & Points both use `customers.loyalty-readiness`.
+3. Customer Master and Loyalty & Points now use the real `customers` and `customers/{customerId}/loyalty` surfaces; the legacy `customers.loyalty-readiness` URL is only a protected redirect.
 4. Customer transaction history points to `sales.index`.
 5. Supplier invoices, supplier cost history, purchase invoices, and purchase cost history reuse `purchasing.invoices`.
 6. Inventory Control Center, Balances, and several inventory substates reuse `inventory.index`.
@@ -339,4 +339,3 @@ Current permission foundations are present, but the target screen model is not f
 ## Verification statement
 
 This report is an inventory and traceability export. It does not claim that every screen was browser-verified, UAT-approved, or production-ready. Existing focused test and browser evidence remains referenced by the relevant closure and test reports. No automated suite or browser action was run while generating this document.
-
